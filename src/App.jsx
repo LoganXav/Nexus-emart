@@ -3,7 +3,7 @@ import Home from "./pages/home/Home"
 import Shop from "./pages/shop/Shop"
 import Product from "./pages/product/Product"
 import Wishlist from "./pages/wishlist/Wishlist"
-import Cart from "./pages/Cart/Cart"
+import Cart from "./pages/cart/Cart"
 import Navbar from "./components/navbar/Navbar"
 import Footer from "./components/footer/Footer"
 import './App.css'
