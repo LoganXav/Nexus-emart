@@ -1,0 +1,68 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  .image {
+    background-color: rgb(241, 241, 237);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 22vw;
+    height: 400px;
+
+    @media (max-width: 1400px) {
+      width: 20vw;
+      height: 380px;
+    }
+    @media (max-width: 1000px) {
+      width: 43vw;
+      height: 350px;
+    }
+    @media (max-width: 853px) {
+      width: 330px;
+      height: 300px;
+    }
+    @media (max-width: 800px) {
+      width: 44vw;
+      height: 300px;
+    }
+  }
+  img {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    object-position: center;
+
+    @media (max-width: 1400px) {
+      width: 350px;
+      height: 350px;
+    }
+  }
+  span {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    color: white;
+    background-color: black;
+    padding: 2px 9px;
+    font-size: 0.85rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  .price {
+    display: flex;
+    gap: 1rem;
+    font-weight: 200;
+    margin-top: -0.5rem;
+
+    .old {
+      text-decoration: line-through;
+    }
+  }
+}
