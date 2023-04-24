@@ -13,6 +13,18 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const [userRegister, setUserRegister] = useState(false);
+  const [active, setActive] = useState(false)
+
+    const isActive = () => {
+       scrollY > 800 ? setActive(true) : setActive(false)
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", isActive)
+        return () => {
+            window.removeEventListener("scroll", isActive)            
+        }      
+    },[])
 
   const modalRef = useRef();
 
@@ -78,7 +90,7 @@ const Navbar = () => {
             </span>
           </div>
         </div>
-        <div className="bottom">
+        <div className={active ? "bottom active" : "bottom "}>
           <Link className="link" to="/">
             <div className="left">Nexus</div>
           </Link>

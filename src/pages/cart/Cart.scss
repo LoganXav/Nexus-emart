@@ -1,0 +1,175 @@
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, rgb(250, 255, 250), rgb(234, 246, 250));
+  gap: 1.5rem;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 8rem auto;
+    gap: 3rem;
+
+    button {
+      padding: 1rem 2.5rem;
+      background-color: black;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+      font-size: 1rem;
+      align-self: flex-start;
+
+      &:hover {
+        transform: translateY(-15%);
+      }
+    }
+  }
+
+  .cart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 10rem auto;
+    width: 80rem;
+    height: 30rem;
+
+    .left {
+      background-color: white;
+      flex: 2;
+      padding: 2rem;
+      box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+      -webkit-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+      -moz-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        .table-row {
+          border-bottom: 1px solid lightgray;
+          // height: 8rem;
+          th {
+            padding: 1.35rem;
+            text-align: center;
+          }
+
+          td {
+            text-align: center;
+            padding: 1.5rem;
+
+            .image-row {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 4rem;
+              width: 30%;
+              margin: 0 auto;
+            }
+            .quantity {
+              display: flex;
+              align-items: center;
+              border: 1px solid lightgray;
+              align-self: center;
+              justify-content: space-between;
+              width: 70%;
+              margin: 0 auto;
+              padding: 0.5rem;
+              p {
+                cursor: pointer;
+              }
+              .sign {
+                font-weight: 300;
+                font-size: 1rem;
+              }
+              .count {
+                font-size: 1.1rem;
+              }
+            }
+            span {
+              padding: 0.4rem 0.6rem;
+              font-weight: bold;
+              background-color: lightgray;
+              border-radius: 50%;
+              color: black;
+              cursor: pointer;
+            }
+            .image {
+              width: 4rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: lightgray;
+              img {
+                width: 6rem;
+              }
+            }
+          }
+        }
+      }
+      .coupon {
+        display: flex;
+        margin: 3rem 0;
+        input {
+          outline: none;
+          border: 1px solid lightgray;
+          padding: 0.9rem 1rem;
+          width: 15rem;
+        }
+        button {
+          padding: 1rem 2rem;
+          background-color: black;
+          color: white;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          font-size: 1rem;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+      flex: 1;
+      background-color: white;
+      box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+      -webkit-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+      -moz-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+
+      hr {
+        border: none;
+        border-top: 1px solid lightgray;
+      }
+      .subtotal {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .shipping {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        justify-content: flex-start;
+        .top {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+      button {
+        padding: 1rem 2rem;
+        background-color: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        font-size: 1rem;
+      }
+    }
+  }
+}

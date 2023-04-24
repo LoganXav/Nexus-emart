@@ -40,8 +40,18 @@
     position: absolute;
     padding: 1.2rem 8rem;
     background-color: transparent;
+    transition: all 1s ease-in-out;
     @media (max-width: 991px) {
       padding: 1.2rem 2rem;
+    }
+
+    &.active{
+      background-color: white;
+      color: black;
+      position: fixed;
+      top: 0;
+      border-bottom: 1px solid lightgrey;
+      z-index: 999;
     }
 
     .right {
