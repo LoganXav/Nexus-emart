@@ -37,7 +37,7 @@ const Categories = () => {
       <div className="bottom">
         {categories.map((category) => (
           <div className="category" key={category.id}>
-            <div class="image">
+            <div className="image">
               <img src={category.img} alt="" />
             </div>
             <h3>{category.name}</h3>

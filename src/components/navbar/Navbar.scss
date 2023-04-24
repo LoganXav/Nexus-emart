@@ -11,8 +11,6 @@
     font-weight: 400;
     color: white;
 
-    .left {
-    }
     .right {
       display: flex;
       align-items: center;
@@ -46,8 +44,6 @@
       padding: 1.2rem 2rem;
     }
 
-    .left {
-    }
     .right {
       display: flex;
       align-items: center;
@@ -64,6 +60,9 @@
           font-size: 0.8rem;
           font-weight: bold;
         }
+      }
+      @media (max-width: 800px) {
+        display: none;
       }
     }
   }
@@ -120,14 +119,14 @@
 // ******* User SignIn Modal
 
 .user-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba($color: #767676, $alpha: 0.8);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #767676, $alpha: 0.8);
   .user {
     width: 30rem;
     position: absolute;
@@ -152,11 +151,11 @@
       .signin {
         color: black;
         background-color: white;
-    }
+      }
       .signin.inactive {
         color: white;
         background-color: black;
-    }
+      }
       .register {
         color: white;
         background-color: black;
@@ -176,7 +175,7 @@
         align-self: flex-start;
       }
       input {
-        padding: .9rem .5rem;
+        padding: 0.9rem 0.5rem;
         font-size: 1.1rem;
         width: 100%;
         border: 1px solid lightgray;
@@ -188,7 +187,7 @@
         align-items: center;
         justify-content: space-between;
         font-size: 1rem;
-        margin: .5rem 0;
+        margin: 0.5rem 0;
 
         .left {
           display: flex;
@@ -204,12 +203,12 @@
             width: 100%;
           }
         }
-        span{
-            cursor: pointer;
+        span {
+          cursor: pointer;
         }
 
-        p{
-            font-size: 0.85rem;
+        p {
+          font-size: 0.85rem;
         }
       }
       button {
