@@ -1,4 +1,5 @@
 import './Hero.scss'
+import heroImg from "../../../public/assets/hero-img.png"
 const Hero = () => {
     return ( 
         <div className="hero">
@@ -9,7 +10,7 @@ const Hero = () => {
                 <button>Shop Now</button>
             </div>
             <div className="right">
-                <img src="../assets/hero-img.png" alt="" />
+                <img src={heroImg} alt="" />
             </div>
         </div>
      );
