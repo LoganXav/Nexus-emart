@@ -14,6 +14,7 @@ const Shop = () => {
       id: 2,
       name: "Alexa Smart Speaker",
       img: "../../assets/homepod.png",
+      discount: "26%",
       oldPrice: "150",
       newPrice: "110",
     },

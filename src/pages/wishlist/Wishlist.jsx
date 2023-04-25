@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./Wishlist.scss";
+import { Link } from "react-router-dom";
 const Wishlist = () => {
-  
-
   const [likedItems, setLikedItems] = useState([
     {
       id: 1,
@@ -43,7 +42,9 @@ const Wishlist = () => {
             <div className="box">
               <p>Your Wishlist is currently empty.</p>
             </div>
-            <button>Return To Shop</button>
+            <Link className="link" to="/shop">
+              <button>Return To Shop</button>
+            </Link>
           </div>
         </>
       ) : (

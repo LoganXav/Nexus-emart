@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import "./Cart.scss";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -39,8 +39,7 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div className="container">
           <Link to="/shop">
-
-          <button>Return To Shop</button>
+            <button>Return To Shop</button>
           </Link>
         </div>
       ) : (
