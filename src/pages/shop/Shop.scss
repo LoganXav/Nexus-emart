@@ -1,0 +1,23 @@
+.shop{
+    margin: 6rem auto;
+    width: 98vw;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    
+    .top{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .breadcrumbs{}
+        .filters{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .right{
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    }
+}

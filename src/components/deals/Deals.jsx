@@ -1,5 +1,6 @@
 import "./Deals.scss";
 import Card from "../card/Card";
+import { Link } from "react-router-dom";
 
 const Deals = () => {
   const deals = [
@@ -90,7 +91,9 @@ const Deals = () => {
           <Card key={deal.id} item={deals} i={i} />
         ))}
       </div>
-      <button>More Collection</button>
+      <Link className="link" to="/shop">
+        <button>More Collection</button>
+      </Link>
     </div>
   );
 };

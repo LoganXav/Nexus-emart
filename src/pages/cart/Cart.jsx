@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"
 import "./Cart.scss";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -37,7 +38,10 @@ const Cart = () => {
     <div className="cart">
       {cartItems.length === 0 ? (
         <div className="container">
+          <Link to="/shop">
+
           <button>Return To Shop</button>
+          </Link>
         </div>
       ) : (
         <div className="cart-card">

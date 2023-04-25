@@ -7,7 +7,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 
 const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -27,6 +27,8 @@ const Navbar = () => {
       window.removeEventListener("scroll", isActive);
     };
   }, []);
+
+  const {pathname} = useLocation()
 
   // USER SIGN IN MODAL
   const modalRef = useRef();
@@ -121,7 +123,7 @@ const Navbar = () => {
             </span>
           </div>
         </div>
-        <div className={active ? "bottom active" : "bottom "}>
+        <div className={active || pathname !== "/" ? "bottom active" : "bottom "}>
           <Link className="link" to="/">
             <div className="left">Nexus</div>
           </Link>

@@ -261,6 +261,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: white;
 
     .top {
       display: flex;
@@ -281,7 +282,7 @@
           .img-bg {
             width: 80px;
             height: 100px;
-            background-color: #d1d1d1;
+            background-color: rgb(241, 241, 237);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -356,7 +357,7 @@
     }
     .toCart {
       color: black;
-      background-color: #e7e7e7;
+      background-color: #d1d1d1;
 
       &:hover {
         transform: translateY(-10%);
