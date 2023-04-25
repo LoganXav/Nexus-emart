@@ -4,6 +4,7 @@
   justify-content: center;
   background: linear-gradient(to right, rgb(250, 255, 250), rgb(234, 246, 250));
   gap: 1.5rem;
+  font-size: 0.8rem;
 
   .container {
     display: flex;
@@ -29,7 +30,7 @@
     }
   }
 
-  .cart-container {
+  .cart-card {
     display: flex;
     align-items: center;
     justify-content: center;

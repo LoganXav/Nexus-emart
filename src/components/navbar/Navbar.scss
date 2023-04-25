@@ -45,13 +45,13 @@
       padding: 1.2rem 2rem;
     }
 
-    &.active{
+    &.active {
       background-color: white;
       color: black;
       position: fixed;
       top: 0;
       border-bottom: 1px solid lightgrey;
-      z-index: 999;
+      z-index: 50;
     }
 
     .right {
@@ -136,7 +136,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba($color: #767676, $alpha: 0.8);
+  background-color: rgba($color: #292929, $alpha: 0.8);
   .user {
     width: 30rem;
     position: absolute;
@@ -230,6 +230,149 @@
         width: 100%;
         font-size: 1.1rem;
         cursor: pointer;
+      }
+    }
+  }
+}
+
+// ******* Cart Modal
+
+.cart-container {
+  display: none;
+  opacity: 0;
+  z-index: -99;
+  position: fixed;
+
+  &.active {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #111111, $alpha: 0.8);
+    opacity: 1;
+    z-index: 51;
+  }
+  .cart-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #d1d1d1;
+        padding: 1rem 1.5rem;
+      }
+      .items {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+        gap: 0.5rem;
+
+        .left {
+          .img-bg {
+            width: 80px;
+            height: 100px;
+            background-color: #d1d1d1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+              width: 200px;
+              height: 200px;
+              object-fit: contain;
+              object-position: center;
+            }
+          }
+        }
+        .right {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          width: 16rem;
+          .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .bottom {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            .count {
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              border: 1px solid lightgrey;
+              padding: 0.17rem 0.27rem;
+              .sign {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+    .hr {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+  .bottom-pay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    p {
+      align-self: flex-end;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid lightgray;
+    }
+    .total {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 1.2rem;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .toCart {
+      color: black;
+      background-color: #e7e7e7;
+
+      &:hover {
+        transform: translateY(-10%);
+        color: white;
+        background-color: black;
+      }
+    }
+    .checkout {
+      color: white;
+      background-color: black;
+
+      &:hover {
+        transform: translateY(-10%);
+        color: black;
+        background-color: transparent;
+        border: 1px solid black;
       }
     }
   }

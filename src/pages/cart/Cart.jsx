@@ -40,7 +40,7 @@ const Cart = () => {
           <button>Return To Shop</button>
         </div>
       ) : (
-        <div className="cart-container">
+        <div className="cart-card">
           <div className="left">
             <table>
               <thead>

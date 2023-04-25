@@ -7,26 +7,31 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const [userRegister, setUserRegister] = useState(false);
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
 
-    const isActive = () => {
-       scrollY > 800 ? setActive(true) : setActive(false)
-    }
+  // NAVBAR SCROLL EFFECT
+  const isActive = () => {
+    scrollY > 800 ? setActive(true) : setActive(false);
+  };
 
-    useEffect(() => {
-        window.addEventListener("scroll", isActive)
-        return () => {
-            window.removeEventListener("scroll", isActive)            
-        }      
-    },[])
+  useEffect(() => {
+    window.addEventListener("scroll", isActive);
+    return () => {
+      window.removeEventListener("scroll", isActive);
+    };
+  }, []);
 
+  // USER SIGN IN MODAL
   const modalRef = useRef();
+  const signinRef = useRef(null);
+  const registerRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -42,18 +47,6 @@ const Navbar = () => {
     };
   }, [modalRef]);
 
-  useEffect(() => {
-    const search = document.querySelector(".search");
-    if (searchOpen == true) {
-      search.classList.add("active");
-    } else {
-      search.classList.remove("active");
-    }
-  }, [searchOpen]);
-
-  const signinRef = useRef(null);
-  const registerRef = useRef(null);
-
   function handleSigninClick() {
     setUserRegister(false);
     signinRef.current.classList.remove("inactive");
@@ -65,6 +58,44 @@ const Navbar = () => {
     registerRef.current.classList.add("active");
     signinRef.current.classList.add("inactive");
   }
+
+  // SEARCH MENU MODAL
+  useEffect(() => {
+    const search = document.querySelector(".search");
+    if (searchOpen == true) {
+      search.classList.add("active");
+    } else {
+      search.classList.remove("active");
+    }
+  }, [searchOpen]);
+
+  // CART MENU
+  const cartRef = useRef(null);
+  const cartContainerRef = useRef(null);
+  const handleOpenCart = () => {
+    cartRef.current.classList.add("active");
+    cartContainerRef.current.classList.add("active");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        cartContainerRef.current.classList.remove("active");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [cartRef]);
+
+  const navigate = useNavigate();
+  const handleGoToCart = () => {
+    cartContainerRef.current.classList.remove("active");
+    navigate("/cart");
+  };
 
   return (
     <>
@@ -107,7 +138,7 @@ const Navbar = () => {
                 <span>5</span>
               </div>
             </Link>
-            <div className="parent">
+            <div onClick={handleOpenCart} className="parent">
               <LocalMallOutlinedIcon />
               <span>5</span>
             </div>
@@ -176,6 +207,86 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      {/* Cart Side Menu */}
+
+      <div ref={cartContainerRef} className="cart-container">
+        <div ref={cartRef} className="cart-menu">
+          <div className="top">
+            <div className="header">
+              <p>Your Basket</p>
+              <p
+                onClick={() =>
+                  cartContainerRef.current.classList.remove("active")
+                }
+                style={{ cursor: "pointer" }}
+              >
+                x
+              </p>
+            </div>
+            <div className="items">
+              <div className="left">
+                <div className="img-bg">
+                  <img src="../../assets/headset.png" alt="" />
+                </div>
+              </div>
+              <div className="right">
+                <div className="top">
+                  <p>Drone</p>
+                  <p>x</p>
+                </div>
+                <div className="bottom">
+                  <div className="count">
+                    <span className="sign">-</span>
+                    <span>1</span>
+                    <span className="sign">+</span>
+                  </div>
+                  <p>$180.00</p>
+                </div>
+              </div>
+            </div>
+            <hr className="hr" />
+            <div className="items">
+              <div className="left">
+                <div className="img-bg">
+                  <img src="../../assets/headset.png" alt="" />
+                </div>
+              </div>
+              <div className="right">
+                <div className="top">
+                  <p>Drone</p>
+                  <p>x</p>
+                </div>
+                <div className="bottom">
+                  <div className="count">
+                    <span className="sign">-</span>
+                    <span>1</span>
+                    <span className="sign">+</span>
+                  </div>
+                  <p>$180.00</p>
+                </div>
+              </div>
+            </div>
+            <hr className="hr" />
+          </div>
+          <div className="bottom-pay">
+            <p>$360.00</p>
+            <hr />
+            <div className="total">
+              <p>
+                <b>Subtotal:</b>
+              </p>
+              <p>
+                <b>$360.00</b>
+              </p>
+            </div>
+            <button className="toCart" onClick={handleGoToCart}>
+              View Cart
+            </button>
+            <button className="checkout">Checkout</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
