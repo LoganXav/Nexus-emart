@@ -8,27 +8,27 @@ const Features = () => {
             id: 1,
             name: "Free shipping",
             desc: "Get your products delivered straight to your doorstep without any additional costs.",
-            icon: <i class="ri-shopping-cart-line"></i>
+            icon: <i className="ri-shopping-cart-line"></i>
         },
         {
             id: 2,
             name: "100% Original product",
             desc: "Rest assured that all products on our website are 100% original and sourced directly from the manufacturer.",
-            icon: <i class="ri-award-line"></i>  
+            icon: <i className="ri-award-line"></i>  
         },
     
         {
             id: 3,
             name: "Gift cards",
             desc: "Choose from a variety of denominations and let your loved ones choose their own perfect gift.",
-            icon: <i class="ri-gift-line"></i>
+            icon: <i className="ri-gift-line"></i>
         },
         
         {
             id: 4,
             name: "Tracking & delivery",
             desc: " Know exactly when your package will arrive and enjoy peace of mind knowing it's on its way.",
-            icon: <i class="ri-truck-line"></i>  
+            icon: <i className="ri-truck-line"></i>  
         }
     ]
     return ( 

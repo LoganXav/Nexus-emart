@@ -1,11 +1,4 @@
 import "./Navbar.scss";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from "@mui/icons-material/Search";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -117,17 +110,17 @@ const Navbar = () => {
           </div>
           <div className="right">
             <span>
-              <i class="ri-question-line"></i>
+              <i className="ri-question-line"></i>
               Help & Contact
             </span>
 
             <span>
-              <i class="ri-price-tag-3-line"></i>
+              <i className="ri-price-tag-3-line"></i>
               Deals of the day
             </span>
 
             <span className="last">
-              <i class="ri-map-pin-line"></i>
+              <i className="ri-map-pin-line"></i>
               Store location
             </span>
           </div>
@@ -137,29 +130,29 @@ const Navbar = () => {
 
         <div className={active ? "bottom active" : "bottom "}>
         <div className="menu">
-          <i class="ri-menu-line"></i>
+          <i className="ri-menu-line"></i>
           </div>
           <Link className="link" to="/">
             <div className="left">
-              <i class="ri-shopping-bag-line"></i>
+              <i className="ri-shopping-bag-line"></i>
               <h2>Nexus</h2>
             </div>
           </Link>
           <div className="right">
             <div onClick={() => setSearchOpen(true)} className="nav-search">
-              <i class="ri-search-line"></i>
+              <i className="ri-search-line"></i>
             </div>
             <div onClick={() => setUserOpen(true)}>
-              <i class="ri-user-3-line"></i>
+              <i className="ri-user-3-line"></i>
             </div>
             <Link className="link" to="/wishlist">
               <div className="parent nav-wish">
-                <i class="ri-heart-line"></i>
+                <i className="ri-heart-line"></i>
                 <span>5</span>
               </div>
             </Link>
             <div onClick={handleOpenCart} className="parent">
-              <i class="ri-shopping-cart-line"></i>
+              <i className="ri-shopping-cart-line"></i>
               <span>5</span>
             </div>
           </div>
@@ -170,7 +163,7 @@ const Navbar = () => {
 
       <div className="search">
         <input placeholder="Type Your Search" type="text" />
-        <button onClick={() => setSearchOpen(false)}><i class="ri-close-line"></i></button>
+        <button onClick={() => setSearchOpen(false)}><i className="ri-close-line"></i></button>
       </div>
 
       {/* *********  USER SIGNIN MODAL  ******** */}
@@ -201,7 +194,7 @@ const Navbar = () => {
                 <label htmlFor="Password">Password</label>
                 <div className="password">
                 <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
-                { showPassword ? <i onClick={toggleShowPassword} class="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} class="ri-eye-line"></i>}
+                { showPassword ? <i onClick={toggleShowPassword} className="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} className="ri-eye-line"></i>}
                 </div>
                 <div className="forgot">
                   <div className="left">
@@ -223,7 +216,7 @@ const Navbar = () => {
                 <label htmlFor="Password">Password *</label>
                 <div className="password">
                 <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
-                { showPassword ? <i onClick={toggleShowPassword} class="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} class="ri-eye-line"></i>}
+                { showPassword ? <i onClick={toggleShowPassword} className="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} className="ri-eye-line"></i>}
                 </div>
                 <div className="forgot">
                   <p>

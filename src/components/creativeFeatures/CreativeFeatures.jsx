@@ -8,21 +8,21 @@ const CreativeFeatures = () => {
             <div className="right">
                 <h1>Creative Features</h1>
                 <div className="feature">
-                    <div className="icon" ><i class="ri-gamepad-line"></i></div>
+                    <div className="icon" ><i className="ri-gamepad-line"></i></div>
                     <div className="text">
                         <h2>Best controllers</h2>
                         <p>Lorem ipsum dolor sit amet consectetur beatae sapiente quaerat!</p>
                     </div>
                 </div>
                 <div className="feature">
-                    <div className="icon"><i class="ri-sound-module-line"></i></div>
+                    <div className="icon"><i className="ri-sound-module-line"></i></div>
                     <div className="text">
                         <h2>Customize settings</h2>
                         <p>Lorem ipsum dolor sit amet consectetur, beatae sapiente quaerat!</p>
                     </div>
                 </div>
                 <div className="feature">
-                    <div className="icon"><i class="ri-tv-line"></i></div>
+                    <div className="icon"><i className="ri-tv-line"></i></div>
                     <div className="text">
                         <h2>High end display</h2>
                         <p>Lorem ipsum dolor sit amet consectetur, samus beatae sapiente quaerat!</p>
