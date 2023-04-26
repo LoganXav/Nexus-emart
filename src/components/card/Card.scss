@@ -12,24 +12,25 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 22vw;
+    // width: 22vw;
     height: 400px;
 
-    @media (max-width: 1400px) {
-      width: 20vw;
-      height: 380px;
-    }
-    @media (max-width: 1000px) {
-      width: 43vw;
+    @media (max-width: 1300px) {
+      width: 290px;
       height: 350px;
     }
+  
     @media (max-width: 853px) {
-      width: 330px;
+      width: 350px;
       height: 300px;
     }
     @media (max-width: 800px) {
       width: 44vw;
       height: 300px;
+    }
+    @media (max-width: 500px) {
+      width: 160px;
+      height: 200px;
     }
   }
   img {
@@ -38,9 +39,21 @@
     object-fit: contain;
     object-position: center;
 
-    @media (max-width: 1400px) {
-      width: 350px;
-      height: 350px;
+    @media (max-width: 1300px) {
+      width: 500px;
+      height: 500px;
+    }
+    @media (max-width: 850px) {
+      width: 450px;
+      height: 450px;
+    }
+    @media (max-width: 800px) {
+      width: 450px;
+      height: 450px;
+    }
+    @media (max-width: 500px) {
+      width: 250px;
+      height: 250px;
     }
   }
   span {

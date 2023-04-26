@@ -7,7 +7,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import { useEffect, useState, useRef } from "react";
-import { Link, useNavigate, useLocation  } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   // USER SIGN IN MODAL
   const modalRef = useRef();
@@ -60,6 +60,13 @@ const Navbar = () => {
     registerRef.current.classList.add("active");
     signinRef.current.classList.add("inactive");
   }
+
+  // PASSWORD VISIBILITY
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // SEARCH MENU MODAL
   useEffect(() => {
@@ -102,56 +109,71 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar">
+
+        {/* *********  NAVBAR TOP  ******** */}
         <div className="top">
           <div className="left">
             Free delivery on orders over $1499. Don’t miss discount.
           </div>
           <div className="right">
             <span>
-              <HelpOutlineOutlinedIcon />
+              <i class="ri-question-line"></i>
               Help & Contact
             </span>
-            |
+
             <span>
-              <LocalOfferOutlinedIcon />
+              <i class="ri-price-tag-3-line"></i>
               Deals of the day
             </span>
-            |
-            <span>
-              <LocationOnOutlinedIcon />
+
+            <span className="last">
+              <i class="ri-map-pin-line"></i>
               Store location
             </span>
           </div>
         </div>
-        <div className={active || pathname !== "/" ? "bottom active" : "bottom "}>
+
+         {/* *********  NAVBAR BOTTOM  ******** */}
+
+        <div className={active ? "bottom active" : "bottom "}>
+        <div className="menu">
+          <i class="ri-menu-line"></i>
+          </div>
           <Link className="link" to="/">
-            <div className="left">Nexus</div>
+            <div className="left">
+              <i class="ri-shopping-bag-line"></i>
+              <h2>Nexus</h2>
+            </div>
           </Link>
           <div className="right">
-            <div onClick={() => setSearchOpen(true)}>
-              <SearchIcon />
+            <div onClick={() => setSearchOpen(true)} className="nav-search">
+              <i class="ri-search-line"></i>
             </div>
             <div onClick={() => setUserOpen(true)}>
-              <PersonOutlineIcon />
+              <i class="ri-user-3-line"></i>
             </div>
             <Link className="link" to="/wishlist">
-              <div className="parent">
-                <FavoriteBorderIcon />
+              <div className="parent nav-wish">
+                <i class="ri-heart-line"></i>
                 <span>5</span>
               </div>
             </Link>
             <div onClick={handleOpenCart} className="parent">
-              <LocalMallOutlinedIcon />
+              <i class="ri-shopping-cart-line"></i>
               <span>5</span>
             </div>
           </div>
         </div>
       </div>
 
+      {/* *********  SEARCH MODAL  ******** */}
+
       <div className="search">
         <input placeholder="Type Your Search" type="text" />
-        <button onClick={() => setSearchOpen(false)}>X</button>
+        <button onClick={() => setSearchOpen(false)}><i class="ri-close-line"></i></button>
       </div>
+
+      {/* *********  USER SIGNIN MODAL  ******** */}
 
       {userOpen && (
         <div className="user-container">
@@ -177,7 +199,10 @@ const Navbar = () => {
                 <label htmlFor="Username Or Email">Username Or Email</label>
                 <input placeholder="Username" type="text" />
                 <label htmlFor="Password">Password</label>
-                <input placeholder="Password" type="Password" />
+                <div className="password">
+                <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
+                { showPassword ? <i onClick={toggleShowPassword} class="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} class="ri-eye-line"></i>}
+                </div>
                 <div className="forgot">
                   <div className="left">
                     <input type="checkbox" />
@@ -191,12 +216,15 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="bottom">
-                <label htmlFor="Username Or Email">Username</label>
+                <label htmlFor="Username Or Email">Username *</label>
                 <input placeholder="Username" type="text" />
-                <label htmlFor="Email">Email Address</label>
+                <label htmlFor="Email">Email Address *</label>
                 <input placeholder="Email Address" type="email" />
-                <label htmlFor="Password">Password</label>
-                <input placeholder="Password" type="Password" />
+                <label htmlFor="Password">Password *</label>
+                <div className="password">
+                <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
+                { showPassword ? <i onClick={toggleShowPassword} class="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} class="ri-eye-line"></i>}
+                </div>
                 <div className="forgot">
                   <p>
                     Your personal data will be used to support your experience

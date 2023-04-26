@@ -1,4 +1,4 @@
-import './creativeFeatures.scss'
+import './CreativeFeatures.scss'
 const CreativeFeatures = () => {
     return ( 
         <div className="creative">
@@ -8,24 +8,24 @@ const CreativeFeatures = () => {
             <div className="right">
                 <h1>Creative Features</h1>
                 <div className="feature">
-                    <div></div>
+                    <div className="icon" ><i class="ri-gamepad-line"></i></div>
                     <div className="text">
                         <h2>Best controllers</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero molestias ipsum accusamus beatae sapiente quaerat!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur beatae sapiente quaerat!</p>
                     </div>
                 </div>
                 <div className="feature">
-                    <div></div>
+                    <div className="icon"><i class="ri-sound-module-line"></i></div>
                     <div className="text">
                         <h2>Customize settings</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero molestias ipsum accusamus beatae sapiente quaerat!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, beatae sapiente quaerat!</p>
                     </div>
                 </div>
                 <div className="feature">
-                    <div></div>
+                    <div className="icon"><i class="ri-tv-line"></i></div>
                     <div className="text">
                         <h2>High end display</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero molestias ipsum accusamus beatae sapiente quaerat!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, samus beatae sapiente quaerat!</p>
                     </div>
                 </div>
             </div>

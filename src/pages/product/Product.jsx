@@ -2,7 +2,7 @@ import "./Product.scss";
 const Product = () => {
   return (
     <div className="product">
-        <span className="breadcrumbs">Home / Audio / Alexa Smart Speaker</span>
+      <span className="breadcrumbs">Home / Audio / Alexa Smart Speaker</span>
       <div className="top">
         <div className="product-display">
           <div className="left">
@@ -59,7 +59,91 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <div className="bottom">bottom</div>
+      <div className="bottom">
+        <div className="product-details">
+          <div className="details-header">
+            <div className="details-options">
+              <p>Description</p>
+              <p>Additional Information</p>
+              <p>Reviews(2)</p>
+            </div>
+            <hr />
+          </div>
+          {/*  */}
+          <div className="about-product">
+            <div className="about-image">
+              <img src="../../assets/google-speaker.png" alt="" />
+            </div>
+            <div className="about-text">
+              <h2>Product details</h2>
+              <p>
+                Talk digital shark heads-up door win involved turn timepoint
+                bed. Room management exploratory they forward should reinvent
+                field. Dunder buy-in first invested gave ipsum down email monday
+                elephant. Please pushback deliverables dive best. Commitment are
+                by world across ui first charts. 2 unit live whatever diarize
+                when closing all know. Now anomalies shelf-ware you win-win-win
+                me close plane. Don’t stop then tomorrow work. Creep
+                procrastinating break support sky.
+              </p>
+            </div>
+          </div>
+          {/*  */}
+
+          <div className="additional-info">
+            <hr />
+            <div className="info">
+              <p>
+                <b>Type</b>
+              </p>
+              <p>Tubelar</p>
+            </div>
+            <hr />
+            <div className="info">
+              <p>
+                <b>Connection Type</b>
+              </p>
+              <p>Wireless, Bluetooth</p>
+            </div>
+            <hr />
+            <div className="info">
+              <p>
+                <b>Special Feature</b>
+              </p>
+              <p>With Voice Control Built-in</p>
+            </div>
+            <hr />
+          </div>
+          {/*  */}
+
+          <div className="reviews">
+            <div className="review">
+              <p>There are no reviews yet.</p>
+              <hr />
+            </div>
+            <div className="add-review">
+              <h4>Be The First To Review "Alexa Smart Speaker"</h4>
+              <p>
+                Your Email Address will not be published. Required fields are
+                marked *
+              </p>
+              <span>stars</span>
+              <textarea
+                name=""
+                id=""
+                placeholder="Your review *"
+                cols="30"
+                rows="10"
+              ></textarea>
+              <div className="input">
+                <input type="text" placeholder="Name *" />
+                <input type="text" placeholder="Email *" />
+              </div>
+            </div>
+            <button>Submit</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,25 +1,37 @@
 .navbar {
-  width: 100vw;
+  width: 100%;
   position: relative;
   .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.4rem 8rem;
+    padding: 0.5rem 3rem;
     background-color: #888581;
     font-size: 0.65rem;
     font-weight: 400;
     color: white;
+    .left {
+      font-size: 0.55rem;
+    }
 
     .right {
       display: flex;
       align-items: center;
-      gap: 1rem;
       span {
         display: flex;
         align-items: center;
-        gap: 0.7rem;
+        padding: 0 1rem;
+        gap: 0.5rem;
+        font-size: 0.55rem;
+        border-right: 1px solid #ffffff;
         cursor: pointer;
+      }
+      .last {
+        border-right: none;
+        padding-right: 0;
+        i {
+          font-size: 0.75rem;
+        }
       }
     }
     @media (max-width: 991px) {
@@ -34,17 +46,20 @@
   }
   .bottom {
     display: flex;
-    width: 100vw;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     position: absolute;
-    padding: 1.2rem 8rem;
+    padding: 0.5rem 3rem;
     background-color: transparent;
-    transition: all 1s ease-in-out;
+    transition: all 0.3s ease;
     @media (max-width: 991px) {
       padding: 1.2rem 2rem;
     }
-
+    @media (max-width: 300px) {
+      padding: 1rem;
+    }
+    
     &.active {
       background-color: white;
       color: black;
@@ -53,32 +68,57 @@
       border-bottom: 1px solid lightgrey;
       z-index: 50;
     }
+    .menu{
+      display: none;
+      cursor: pointer;
+      @media (max-width: 800px) {
+        display: flex;
+      }
+
+    }
+    .left {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      // font-weight: bold;
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
 
     .right {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      // gap: 1.2rem;
       div {
         cursor: pointer;
+        margin-left: 1.2rem;
       }
       .parent {
         position: relative;
         span {
           position: absolute;
-          top: -6px;
-          right: -6px;
-          font-size: 0.8rem;
+          top: -7px;
+          right: -7px;
+          font-size: 0.65rem;
           font-weight: bold;
         }
       }
-      @media (max-width: 800px) {
-        display: none;
+
+      .nav-search,
+      .parent.nav-wish {
+        @media (max-width: 800px) {
+          display: none;
+        }
       }
+      
     }
   }
 }
 
-// ****** Product Search Modal
+// ****** PRODUCT SEARCH MODAL
 
 .search {
   opacity: 0;
@@ -108,6 +148,7 @@
   input {
     display: block;
     border: none;
+    background-color: transparent;
     width: 60vw;
     outline: none;
     border-bottom: 1px solid black;
@@ -118,15 +159,17 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 2rem 2.5rem;
+    padding: 1rem 1.3rem;
     font-size: 1.3vw;
     color: white;
     background-color: black;
     cursor: pointer;
+    outline: none;
+    border: none;
   }
 }
 
-// ******* User SignIn Modal
+// ******* USER SIGNIN MODAL
 
 .user-container {
   display: flex;
@@ -143,10 +186,17 @@
     position: absolute;
     background-color: white;
     border: none;
-    margin: 5rem auto;
+    margin: 3rem auto;
     display: flex;
     flex-direction: column;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
+
+    @media (max-width: 500px) {
+      width: 90vw;
+      margin: 3rem auto;
+
+    }
+    
     .top {
       display: flex;
       align-items: center;
@@ -154,10 +204,11 @@
       button {
         padding: 1rem 3rem;
         flex-basis: 50%;
-        font-size: 1.1rem;
+        font-size: 0.8rem;
         border: none;
         cursor: pointer;
         outline: none;
+        
       }
       .signin {
         color: black;
@@ -182,23 +233,48 @@
       align-items: center;
       gap: 1rem;
       padding: 4rem 3rem;
+      @media (max-width: 800px) {
+        padding: 2rem 1rem;
+      }
       label {
         align-self: flex-start;
       }
-      input {
-        padding: 0.9rem 0.5rem;
-        font-size: 1.1rem;
+      input{
+        font-size: 0.8rem;
         width: 100%;
-        border: 1px solid lightgray;
+        background-color: transparent;
         outline: none;
+        padding: 0.9rem 0.5rem;
+        border: 1px solid lightgray;
+      }
+      .password{
+        border: 1px solid lightgray;
+        display: flex;
+        padding: 0.9rem 0.5rem;
+        align-items: center;
+        width: 100%;
+        #input {
+        border: none;
+        font-size: 0.8rem;
+        padding: 0;
+        background-color: transparent;
+        outline: none;
+      }
+      i{
+        cursor: pointer;
+        color: rgb(125, 125, 125);
+      }
       }
       .forgot {
         display: flex;
         width: 100%;
         align-items: center;
         justify-content: space-between;
-        font-size: 1rem;
+        font-size: 0.7rem;
         margin: 0.5rem 0;
+        p{
+          
+        }
 
         .left {
           display: flex;
@@ -219,7 +295,7 @@
         }
 
         p {
-          font-size: 0.85rem;
+          font-size: 0.7rem;
         }
       }
       button {
@@ -229,14 +305,21 @@
         outline: none;
         padding: 1rem 3rem;
         width: 100%;
-        font-size: 1.1rem;
+        font-size: 0.8rem;
         cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover{
+          color: black;
+          border: 1px solid black;
+          background-color: white;
+        }
       }
     }
   }
 }
 
-// ******* Cart Modal
+// ******* CART MODAL *******
 
 .cart-container {
   display: none;
