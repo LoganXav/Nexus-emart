@@ -59,14 +59,14 @@ const Cart = () => {
                   <tr className="table-row">
                     <td>
                       <div className="image-row">
-                        <span onClick={() => removeItem(item.id)}>x</span>
+                        <span onClick={() => removeItem(item.id)}><i className="ri-close-line"></i></span>
                         <div className="image">
                           <img src={item.img} alt="" />
                         </div>
                         <p>{item.name}</p>
                       </div>
                     </td>
-                    <td>${item.price}</td>
+                    <td>${item.price}.00</td>
                     <td>
                       <div className="quantity">
                         <p className="sign">-</p>
@@ -74,7 +74,7 @@ const Cart = () => {
                         <p className="sign">+</p>
                       </div>
                     </td>
-                    <td>$400</td>
+                    <td>$400.00</td>
                   </tr>
                 </tbody>
               ))}
@@ -89,7 +89,7 @@ const Cart = () => {
             <hr />
             <div className="subtotal">
               <p>Subtotal</p>
-              <p>$180</p>
+              <p>$180.00</p>
             </div>
             <hr />
             <div className="shipping">

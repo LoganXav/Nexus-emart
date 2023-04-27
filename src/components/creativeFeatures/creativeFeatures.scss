@@ -52,6 +52,9 @@
       h1 {
         margin-bottom: 1rem;
         font-size: 1.5rem;
+        @media (max-width: 900px) {
+          font-size: 1.2rem;
+        }
       }
       .feature {
         display: flex;
@@ -59,7 +62,7 @@
         align-items: center;
         @media (max-width: 900px) {
           padding: 0;
-        //   max-width: 70%;
+          //   max-width: 70%;
           align-items: flex-start;
         }
         i {
@@ -71,10 +74,17 @@
           gap: 1rem;
           h2 {
             font-size: 1rem;
+            @media (max-width: 900px) {
+              font-size: 0.8rem;
+            }
+           
           }
           p {
             font-size: 0.8rem;
             font-weight: 300;
+            @media (max-width: 900px) {
+              font-size: 0.7rem;
+            }
            
           }
         }
