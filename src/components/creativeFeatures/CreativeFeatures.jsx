@@ -1,4 +1,4 @@
-import './CreativeFeatures.scss'
+import './creativeFeatures.scss'
 const CreativeFeatures = () => {
     return ( 
         <div className="creative">

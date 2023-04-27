@@ -102,7 +102,6 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar">
-
         {/* *********  NAVBAR TOP  ******** */}
         <div className="top">
           <div className="left">
@@ -126,11 +125,11 @@ const Navbar = () => {
           </div>
         </div>
 
-         {/* *********  NAVBAR BOTTOM  ******** */}
+        {/* *********  NAVBAR BOTTOM  ******** */}
 
         <div className={active ? "bottom active" : "bottom "}>
-        <div className="menu">
-          <i className="ri-menu-line"></i>
+          <div className="menu">
+            <i className="ri-menu-line"></i>
           </div>
           <Link className="link" to="/">
             <div className="left">
@@ -163,7 +162,9 @@ const Navbar = () => {
 
       <div className="search">
         <input placeholder="Type Your Search" type="text" />
-        <button onClick={() => setSearchOpen(false)}><i className="ri-close-line"></i></button>
+        <button onClick={() => setSearchOpen(false)}>
+          <i className="ri-close-line"></i>
+        </button>
       </div>
 
       {/* *********  USER SIGNIN MODAL  ******** */}
@@ -193,8 +194,19 @@ const Navbar = () => {
                 <input placeholder="Username" type="text" />
                 <label htmlFor="Password">Password</label>
                 <div className="password">
-                <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
-                { showPassword ? <i onClick={toggleShowPassword} className="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} className="ri-eye-line"></i>}
+                  <input
+                    id="input"
+                    placeholder="Password"
+                    type={showPassword ? "text" : "password"}
+                  />
+                  {showPassword ? (
+                    <i
+                      onClick={toggleShowPassword}
+                      className="ri-eye-off-line"
+                    ></i>
+                  ) : (
+                    <i onClick={toggleShowPassword} className="ri-eye-line"></i>
+                  )}
                 </div>
                 <div className="forgot">
                   <div className="left">
@@ -215,8 +227,19 @@ const Navbar = () => {
                 <input placeholder="Email Address" type="email" />
                 <label htmlFor="Password">Password *</label>
                 <div className="password">
-                <input id="input" placeholder="Password" type={showPassword ? "text" : "password"} />
-                { showPassword ? <i onClick={toggleShowPassword} className="ri-eye-off-line"></i> : <i onClick={toggleShowPassword} className="ri-eye-line"></i>}
+                  <input
+                    id="input"
+                    placeholder="Password"
+                    type={showPassword ? "text" : "password"}
+                  />
+                  {showPassword ? (
+                    <i
+                      onClick={toggleShowPassword}
+                      className="ri-eye-off-line"
+                    ></i>
+                  ) : (
+                    <i onClick={toggleShowPassword} className="ri-eye-line"></i>
+                  )}
                 </div>
                 <div className="forgot">
                   <p>
@@ -231,7 +254,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Cart Side Menu */}
+      {/* CART SIDE MENU */}
 
       <div ref={cartContainerRef} className="cart-container">
         <div ref={cartRef} className="cart-menu">
@@ -244,7 +267,7 @@ const Navbar = () => {
                 }
                 style={{ cursor: "pointer" }}
               >
-                x
+                <i className="ri-close-line"></i>
               </p>
             </div>
             <div className="items">
@@ -255,8 +278,12 @@ const Navbar = () => {
               </div>
               <div className="right">
                 <div className="top">
-                  <p>Drone</p>
-                  <p>x</p>
+                  <p>
+                    <b>Drone</b>
+                  </p>
+                  <p>
+                    <i className="ri-close-line"></i>
+                  </p>
                 </div>
                 <div className="bottom">
                   <div className="count">
@@ -277,8 +304,12 @@ const Navbar = () => {
               </div>
               <div className="right">
                 <div className="top">
-                  <p>Drone</p>
-                  <p>x</p>
+                  <p>
+                    <b>Drone</b>
+                  </p>
+                  <p>
+                    <i className="ri-close-line"></i>
+                  </p>
                 </div>
                 <div className="bottom">
                   <div className="count">
