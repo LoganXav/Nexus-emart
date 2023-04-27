@@ -1,5 +1,5 @@
 import Card from "../card/Card";
-import "./NewCollection.scss";
+import "./newCollection.scss";
 const NewCollection = () => {
   const collections = [
     {
