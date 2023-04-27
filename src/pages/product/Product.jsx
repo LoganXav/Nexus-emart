@@ -14,7 +14,7 @@ const Product = () => {
               <h2>Alexa Smart Speaker</h2>
               <span className="like"><i className="ri-heart-line"></i></span>
             </div>
-            <h>$110.00</h>
+            <p>$110.00</p>
             <span className="quantity">Quantity</span>
             <div className="addCart">
               <div className="count">
