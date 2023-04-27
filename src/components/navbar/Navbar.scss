@@ -398,9 +398,10 @@
             .count {
               display: flex;
               flex-direction: row;
+              align-items: center;
               gap: .6rem;
               border: 1px solid lightgrey;
-              padding: 0.08rem 0.17rem;
+              padding: 0.1rem 0.17rem;
               font-size: .6rem;
               .sign {
                 cursor: pointer;
