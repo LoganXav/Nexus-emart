@@ -7,7 +7,7 @@ const Wishlist = () => {
       id: 1,
       name: "Drone",
       img: "../../assets/spy-drone.png",
-      price: 110,
+      price: 110.00,
       date: "April 24, 2023",
       stockStatus: true,
     },
@@ -15,7 +15,7 @@ const Wishlist = () => {
       id: 2,
       name: "Drone",
       img: "../../assets/spy-drone.png",
-      price: 110,
+      price: 110.00,
       date: "April 24, 2023",
       stockStatus: true,
     },
@@ -23,7 +23,7 @@ const Wishlist = () => {
       id: 3,
       name: "Drone",
       img: "../../assets/spy-drone.png",
-      price: 110,
+      price: 110.00,
       date: "April 24, 2023",
       stockStatus: false,
     },
@@ -51,13 +51,13 @@ const Wishlist = () => {
         <div className="table">
           <table>
             <thead>
-              <tr className="table-row">
-                <th></th>
-                <th>Product Name</th>
-                <th>Unit Price</th>
-                <th>Date Added</th>
-                <th>Stock Status</th>
-                <th></th>
+              <tr className="table-row top">
+                <th className="others"></th>
+                <th className="others">Product</th>
+                <th className="others" >Unit Price</th>
+                <th className="others" >Date Added</th>
+                <th className="others" >Stock Status</th>
+                <th className="others"></th>
               </tr>
             </thead>
             {likedItems.map((item, i) => (
@@ -65,14 +65,14 @@ const Wishlist = () => {
                 <tr className="table-row">
                   <td className="first-row">
                     <div className="image-row">
-                      <span onClick={() => removeItem(item.id)}>x</span>
+                      <span onClick={() => removeItem(item.id)}><i className="ri-close-line"></i></span>
                       <div className="image">
                         <img src={item.img} alt="" />
                       </div>
                     </div>
                   </td>
                   <td>{item.name}</td>
-                  <td>${item.price}</td>
+                  <td>${item.price}.00</td>
                   <td>{item.date}</td>
                   <td>{item.stockStatus ? "In Stock" : "Out of Stock"}</td>
                   <td>

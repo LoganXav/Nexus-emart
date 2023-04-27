@@ -85,12 +85,10 @@ const Shop = () => {
       <div className="top">
         <div className="breadcrumbs">
           <div>
-            <b>
-              <Link className="link" to="/">
-                Home
-              </Link>{" "}
-              / Shop
-            </b>
+            <Link className="link" to="/">
+              Home
+            </Link>{" "}
+            / Shop
           </div>
         </div>
         <div className="filters">
@@ -99,16 +97,19 @@ const Shop = () => {
           </div>
           <div className="right">
             <span>Filters</span>
+            <i className="ri-sound-module-line"></i>
             <hr />
             <span>Default Sorting</span>
-            <hr />
+            <i className="ri-arrow-up-down-fill"></i>
           </div>
         </div>
       </div>
-      <div className="bottom">
-        {products.map((product, i) => (
-          <Card item={products} key={product.id} i={i} />
-        ))}
+      <div className="bottom-container">
+        <div className="bottom">
+          {products.map((product, i) => (
+            <Card item={products} key={product.id} i={i} />
+          ))}
+        </div>
       </div>
     </div>
   );

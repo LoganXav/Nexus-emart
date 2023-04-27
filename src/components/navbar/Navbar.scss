@@ -1,6 +1,5 @@
 .navbar {
   width: 100%;
-  position: relative;
   .top {
     display: flex;
     justify-content: space-between;
@@ -55,16 +54,18 @@
     transition: all 0.3s ease;
     @media (max-width: 991px) {
       padding: 1.2rem 2rem;
+      top: 0;
     }
     @media (max-width: 300px) {
       padding: 1rem;
     }
     
     &.active {
-      background-color: white;
       color: black;
       position: fixed;
+      background-color: white;
       top: 0;
+      left: 0;
       border-bottom: 1px solid lightgrey;
       z-index: 50;
     }
