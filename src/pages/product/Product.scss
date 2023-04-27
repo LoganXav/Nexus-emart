@@ -1,9 +1,19 @@
 .product {
-  width: 90vw;
+  width: 98vw;
   margin: 5rem auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 450px) {
+    margin: 6rem auto;
+  }
+  .breadcrumbs {
+    font-size: 0.8rem;
+    @media (max-width: 450px) {
+      font-size: 0.7rem;
+    }
+  }
   .top {
     display: flex;
     flex-direction: column;
@@ -12,6 +22,10 @@
     .product-display {
       display: flex;
       gap: 3rem;
+
+      @media (max-width: 900px) {
+        flex-direction: column;
+      }
       .left {
         height: 30rem;
         width: 25rem;
@@ -19,10 +33,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @media (max-width: 450px) {
+          width: 350px;
+          height: 300px;
+          margin: 0 auto;
+        }
 
         img {
           object-fit: contain;
           object-position: center;
+          @media (max-width: 450px) {
+            width: 350px;
+          }
         }
       }
 
@@ -35,11 +57,22 @@
           justify-content: space-between;
           align-items: center;
           width: 105%;
+          @media (max-width: 900px) {
+            width: 100%;
+          }
+          h2 {
+            @media (max-width: 550px) {
+              font-size: 1.2rem;
+            }
+          }
           .like {
             border-radius: 50%;
-            padding: 0.4rem 0.8rem;
+            padding: 0.4rem;
             border: 1px solid lightgray;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
         .quantity {
@@ -57,6 +90,10 @@
             gap: 1.2rem;
             background-color: rgb(235, 235, 235);
             padding: 0.7rem 0.8rem;
+            @media (max-width: 550px) {
+              padding: 0.5rem 0.6rem;
+              font-size: 0.7rem;
+            }
             .sign {
               font-weight: 300;
               cursor: pointer;
@@ -73,6 +110,9 @@
 
             &:hover {
               transform: translateY(-10%);
+            }
+            @media (max-width: 450px) {
+              padding: 0.75rem 4.95rem;
             }
           }
         }
@@ -121,6 +161,10 @@
     .product-preview {
       display: flex;
       gap: 2rem;
+
+      @media (max-width: 900px) {
+        display: none;
+      }
       .border {
         border: 1px solid black;
         padding: 0.5rem;
@@ -146,13 +190,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    p{
-        font-weight: 200;
+    p {
+      font-weight: 200;
     }
     .product-details {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      font-size: .8rem;
       .details-header {
         display: flex;
         flex-direction: column;
@@ -160,10 +205,15 @@
           display: flex;
           align-items: center;
           flex-direction: row;
+          flex-wrap: wrap;
           p {
             padding: 1rem 2rem;
             cursor: pointer;
             font-weight: normal;
+            @media (max-width: 900px) {
+              padding: 0.7rem 1.2rem;
+              font-size: 0.8rem;
+            }
             &:hover {
               background-color: black;
               color: white;
@@ -177,8 +227,11 @@
       }
       //      PRODUCT DESCRIPTION
       .about-product {
-        display: none;
+        display: flex;
         gap: 1rem;
+        @media (max-width: 550px) {
+          flex-direction: column;
+        }
         .about-image {
           width: 10rem;
           height: 15rem;
@@ -198,13 +251,16 @@
           gap: 1rem;
           p {
             max-width: 70%;
+            @media (max-width: 550px) {
+              max-width: 100%;
+            }
           }
         }
       }
 
-    //   ADDITIONAL INFORMATION
+      //   ADDITIONAL INFORMATION
       .additional-info {
-        display: none;
+        display: flex;
         flex-direction: column;
 
         hr {
@@ -219,63 +275,78 @@
         }
       }
 
-    //   PRODUCT REVIEWS
-    .reviews{
+      //   PRODUCT REVIEWS
+      .reviews {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        .review{
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            hr{
-                border: none;
-                border-top: .5px solid lightgray;
-            }
+        .review {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-bottom: 1.5rem;
+          font-size: .8rem;
+          @media (max-width: 850px) {
+           font-size: .7rem;
+          }
+          hr {
+            border: none;
+            border-top: 0.5px solid lightgray;
+          }
         }
-        .add-review{
+        .add-review {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          width: 50rem;
+          @media (max-width: 800px) {
+            width: 100%;
+          }
+          h4{
+            font-size: 1rem;
+          }
+          p{
+            font-size: .8rem;
+          }
+          textarea {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid lightgray;
+            outline: none;
+          }
+          .input {
             display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        width: 50rem;
-            textarea{
-                padding: 1rem;
-                margin-bottom: 1rem;
-                border: 1px solid lightgray;
-                outline: none;
+            gap: 1rem;
+            @media (max-width: 500px) {
+              flex-direction: column;
             }
-            .input{
-                display: flex;
-                gap: 1rem;
-                input{
-                    padding: .7rem 1rem;
-                    outline: none;
-                    width: 100%;
-                    border: 1px solid lightgray;
-                }
+            input {
+              padding: 0.7rem 1rem;
+              outline: none;
+              width: 100%;
+              border: 1px solid lightgray;
             }
-    }
-    button{
-        padding: .7rem 2.5rem;
-        background-color: black;
-        border: none;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        outline: none;
-        font-size: 1rem;
-        width: 10rem;
+          }
+        }
+        button {
+          padding: 0.7rem 2.5rem;
+          background-color: black;
+          border: none;
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          outline: none;
+          font-size: .8rem;
+          width: 10rem;
 
-        &:hover{
+          &:hover {
             transform: translateY(-15%);
             color: black;
             background-color: transparent;
             border: 1px solid black;
+          }
         }
-    }
-    }
+      }
     }
   }
 }

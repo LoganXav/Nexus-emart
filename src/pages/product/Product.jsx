@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./Product.scss";
 const Product = () => {
   return (
     <div className="product">
-      <span className="breadcrumbs">Home / Audio / Alexa Smart Speaker</span>
+      <span className="breadcrumbs"><Link className="link" to="/">Home</Link> / Audio / Alexa Smart Speaker</span>
       <div className="top">
         <div className="product-display">
           <div className="left">
@@ -11,7 +12,7 @@ const Product = () => {
           <div className="right">
             <div className="product-name">
               <h2>Alexa Smart Speaker</h2>
-              <span className="like">O</span>
+              <span className="like"><i className="ri-heart-line"></i></span>
             </div>
             <h>$110.00</h>
             <span className="quantity">Quantity</span>
@@ -69,7 +70,7 @@ const Product = () => {
             </div>
             <hr />
           </div>
-          {/*  */}
+          {/*  PRODUCT DESCRIPTION  */}
           <div className="about-product">
             <div className="about-image">
               <img src="../../assets/google-speaker.png" alt="" />
@@ -88,7 +89,7 @@ const Product = () => {
               </p>
             </div>
           </div>
-          {/*  */}
+          {/*  ADDITIONAL INFORMATION  */}
 
           <div className="additional-info">
             <hr />
@@ -114,7 +115,7 @@ const Product = () => {
             </div>
             <hr />
           </div>
-          {/*  */}
+          {/*  REVIEWS  */}
 
           <div className="reviews">
             <div className="review">
@@ -127,7 +128,13 @@ const Product = () => {
                 Your Email Address will not be published. Required fields are
                 marked *
               </p>
-              <span>stars</span>
+              <div className="stars">
+              <span><i class="ri-star-line"></i></span>
+              <span><i class="ri-star-line"></i></span>
+              <span><i class="ri-star-line"></i></span>
+              <span><i class="ri-star-line"></i></span>
+              <span><i class="ri-star-line"></i></span>
+              </div>
               <textarea
                 name=""
                 id=""
