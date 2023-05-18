@@ -1,49 +1,41 @@
 import Card from "../card/Card";
 import "./newCollection.scss";
+import useFetch from "../../hooks/useFetch";
+import { motion } from "framer-motion";
+
 const NewCollection = () => {
-  const collections = [
-    {
-      id: 1,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      // oldPrice: '150',
-      newPrice: "180",
-    },
-    {
-      id: 2,
-      name: "Alexa Smart Speaker",
-      img: "../../assets/homepod.png",
-      oldPrice: "150",
-      newPrice: "110",
-    },
-    {
-      id: 3,
-      name: "Major III headphone",
-      img: "../../assets/headset.png",
-      // oldPrice: '150',
-      newPrice: "70",
-    },
-    {
-      id: 4,
-      name: "Smart Watch",
-      img: "../../assets/smart-watch.png",
-      oldPrice: "150",
-      newPrice: "110",
-      discount: "-27%",
-    },
-  ];
+  const { data, loading, error } = useFetch(
+    "/products?populate=*&[filters][type][$eq]=new"
+  );
 
   return (
     <div className="newCollection">
-        <div className="top">
-            <h1>New collection</h1>
-            <p>Wand crossbow phoenix levicorpus sirius. Easy raw-steak half-blood petrified veela house lupin it.</p>
-        </div>
-      <div className="bottom">
-        {collections.map((collection, i) => (
-          <Card key={collection.id} item={collections} i={i} />
-        ))}
+      <div className="top">
+        <h1>New collection</h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{
+            ease: [0.6, 0.01, 0.05, 0.9],
+            duration: 1,
+          }}
+          viewport={{ once: true }}
+        >
+          Wand crossbow phoenix levicorpus sirius. Easy raw-steak half-blood
+          petrified veela house lupin it.
+        </motion.p>
       </div>
+      {loading ? (
+        "loading..."
+      ) : error ? (
+        "Something went wrong"
+      ) : (
+        <div className="bottom">
+          {data.map((collection, i) => (
+            <Card key={collection.id} item={data} i={i} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

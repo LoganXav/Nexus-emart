@@ -1,38 +1,16 @@
-import { useState } from "react";
 import "./Wishlist.scss";
 import { Link } from "react-router-dom";
-const Wishlist = () => {
-  const [likedItems, setLikedItems] = useState([
-    {
-      id: 1,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110.00,
-      date: "April 24, 2023",
-      stockStatus: true,
-    },
-    {
-      id: 2,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110.00,
-      date: "April 24, 2023",
-      stockStatus: true,
-    },
-    {
-      id: 3,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110.00,
-      date: "April 24, 2023",
-      stockStatus: false,
-    },
-  ]);
+import { useDispatch, useSelector } from "react-redux"
+import { removeFromWishlist } from "../../redux/wishlistReducer";
+import { addToCart } from "../../redux/cartReducer";
 
-  const removeItem = (id) => {
-    const updatedItems = likedItems.filter((item) => item.id !== id);
-    setLikedItems(updatedItems);
-  };
+
+const Wishlist = () => {
+
+  const dispatch = useDispatch()
+
+  const likedItems = useSelector((state) => state.wishlist.products)
+  console.log(likedItems)
 
   return (
     <div className="wishlist">
@@ -65,18 +43,30 @@ const Wishlist = () => {
                 <tr className="table-row">
                   <td className="first-row">
                     <div className="image-row">
-                      <span onClick={() => removeItem(item.id)}><i className="ri-close-line"></i></span>
-                      <div className="image">
-                        <img src={item.img} alt="" />
-                      </div>
+                      <span onClick={() => dispatch(removeFromWishlist(item.id))}><i className="ri-close-line"></i></span>
+                      <Link to={`/product/${item.id}`} className="image">
+                        <img src={
+                                import.meta.env.VITE_APP_UPLOAD_URL + item.img
+                              } alt="" />
+                      </Link>
                     </div>
                   </td>
-                  <td>{item.name}</td>
-                  <td>${item.price}.00</td>
+                  <td>{item.title}</td>
+                  <td>N {item.price}</td>
                   <td>{item.date}</td>
-                  <td>{item.stockStatus ? "In Stock" : "Out of Stock"}</td>
+                  <td>{item.inStock ? <p>In Stock {<i class="ri-check-line"></i>} </p> : "Out of Stock"}</td>
                   <td>
-                    <button>Add To Cart</button>
+                    <button  onClick={() =>
+                      dispatch(
+                        addToCart({
+                          id: item.id,
+                          title: item.title,
+                          price: item.price,
+                          img: item.img,
+                          quantity: 1
+                        })
+                      )
+                    }>Add To Cart</button>
                   </td>
                 </tr>
               </tbody>

@@ -1,84 +1,30 @@
-import { Link } from "react-router-dom";
-import Card from "../../components/card/Card";
 import "./Shop.scss";
+import Card from "../../components/card/Card";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+
 const Shop = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      // oldPrice: '150',
-      newPrice: "180",
-    },
-    {
-      id: 2,
-      name: "Alexa Smart Speaker",
-      img: "../../assets/homepod.png",
-      discount: "26%",
-      oldPrice: "150",
-      newPrice: "110",
-    },
-    {
-      id: 3,
-      name: "Major III headphone",
-      img: "../../assets/headset.png",
-      // oldPrice: '150',
-      newPrice: "70",
-    },
-    {
-      id: 4,
-      name: "Smart Watch",
-      img: "../../assets/smart-watch.png",
-      oldPrice: "150",
-      newPrice: "110",
-      discount: "-27%",
-    },
-    {
-      id: 5,
-      name: "Google Smart Speaker",
-      img: "../../assets/google-speaker.png",
-      // oldPrice: '150',
-      newPrice: "130",
-    },
-    {
-      id: 6,
-      name: "i12 Earbuds",
-      img: "../../assets/airpods.png",
-      // oldPrice: '150',
-      newPrice: "112",
-    },
-    {
-      id: 7,
-      name: "Digital Camera",
-      img: "../../assets/digital-camera.png",
-      oldPrice: "130",
-      newPrice: "110",
-      discount: "-15%",
-    },
-    {
-      id: 8,
-      name: "Optical Camera",
-      img: "../../assets/camera.png",
-      oldPrice: "115",
-      newPrice: "94",
-      discount: "-18%",
-    },
-    // {
-    //   id: 2,
-    //   name: "Oculus ",
-    //   img: "../../assets/oculus.png",
-    //   oldPrice: "180",
-    //   newPrice: "172",
-    //   discount: "-4%",
-    // },
-    // {
-    //     id: 10,
-    //     name: 'i8 series Smartwatch',
-    //     img: '../../assets/smart-watch',
-    //     oldPrice: '150',
-    //     newPrice: '110'
-    // },
-  ];
+  
+  const [value, setValue] = useState(100000);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [category, setCategory] = useState(null);
+  const [type, setType] = useState(null);
+
+  const { data, loading, error } = useFetch(`/products?populate=*&[filters][price][$lte]=${value}${category ? `&[filters][categories][desc][$eq]=${category}` : ''}${type ? `&[filters][type][$eq]=${type}` : ''}`);
+  
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleCategoryChange = (category) => {
+    setType(null)
+    setCategory(category)
+  }
+  const handleTypeChange = (type) => {
+    setCategory(null)
+    setType(type)
+  }
 
   return (
     <div className="shop">
@@ -91,12 +37,12 @@ const Shop = () => {
             / Shop
           </div>
         </div>
-        <div className="filters">
+        <div className="filter-options">
           <div className="left">
             <p>Showing all 10 results</p>
           </div>
           <div className="right">
-            <span>Filters</span>
+            <span onClick={() => setFilterOpen(!filterOpen)}>Filters</span>
             <i className="ri-sound-module-line"></i>
             <hr />
             <span>Default Sorting</span>
@@ -104,12 +50,53 @@ const Shop = () => {
           </div>
         </div>
       </div>
-      <div className="bottom-container">
-        <div className="bottom">
-          {products.map((product, i) => (
-            <Card item={products} key={product.id} i={i} />
-          ))}
+      {filterOpen && (
+        <div className="filter-container">
+          <div className="headings">
+            <h3>Product Categories</h3>
+            <h3>Filter by price</h3>
+          </div>
+          <div className="options">
+            <div className="category-options">
+              <span onClick={() => handleCategoryChange(null)}>All</span>
+              <span onClick={() => handleCategoryChange('audio')}>Audio</span>
+              <span onClick={() => handleCategoryChange('gaming')}>Gaming</span>
+              <span onClick={() => handleCategoryChange('visual')}>Visual</span>
+              <span onClick={() => handleTypeChange('new')}>New Collection</span>
+              <span onClick={() => handleTypeChange('deal')}>Deals</span>
+            </div>
+            <div className="price">
+              <input
+                type="range"
+                min="1000"
+                max="100000"
+                step="1000"
+                value={value}
+                onChange={handleChange}
+              />
+              <div className="price-container">
+                <input type="text" defaultValue={`N ${1000}`} />
+                <input type="text" value={`N ${value}`} />
+              </div>
+              <p className="reset" onClick={() => setValue(1000)}>
+                Reset
+              </p>
+            </div>
+          </div>
         </div>
+      )}
+      <div className="bottom-container">
+        {loading ? (
+          "loading..."
+        ) : error ? (
+          "Something went wrong"
+        ) : (
+          <div className="bottom">
+            {data.map((product, i) => (
+              <Card item={data} key={product.id} i={i} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

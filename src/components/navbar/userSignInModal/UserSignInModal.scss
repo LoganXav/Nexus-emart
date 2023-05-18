@@ -1,0 +1,144 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 53;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #292929, $alpha: 0.8);
+    .user {
+      width: 30rem;
+      position: absolute;
+      background-color: white;
+      border: none;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+  
+      @media (max-width: 500px) {
+        width: 90vw;
+        margin: 3rem auto;
+      }
+  
+      .top {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        button {
+          padding: 1rem 3rem;
+          flex-basis: 50%;
+          font-size: 0.8rem;
+          border: none;
+          cursor: pointer;
+          outline: none;
+        }
+        .signin {
+          color: black;
+          background-color: white;
+        }
+        .signin.inactive {
+          color: white;
+          background-color: black;
+        }
+        .register {
+          color: white;
+          background-color: black;
+        }
+        .register.active {
+          color: black;
+          background-color: white;
+        }
+      }
+      .bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 3rem 3rem;
+        @media (max-width: 500px) {
+          padding: 2rem 1rem;
+        }
+        label {
+          align-self: flex-start;
+        }
+        input {
+          font-size: 0.8rem;
+          width: 100%;
+          background-color: transparent;
+          outline: none;
+          padding: 0.9rem 0.5rem;
+          border: 1px solid lightgray;
+        }
+        .password {
+          border: 1px solid lightgray;
+          display: flex;
+          padding: 0.9rem 0.5rem;
+          align-items: center;
+          width: 100%;
+          #input {
+            border: none;
+            font-size: 0.8rem;
+            padding: 0;
+            background-color: transparent;
+            outline: none;
+          }
+          i {
+            cursor: pointer;
+            color: rgb(125, 125, 125);
+          }
+        }
+        .forgot {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.7rem;
+          margin: 0.5rem 0;
+  
+          .left {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            gap: 0.8rem;
+            input {
+              flex-basis: 7%;
+              cursor: pointer;
+            }
+  
+            span {
+              width: 100%;
+            }
+          }
+          span {
+            cursor: pointer;
+          }
+  
+          p {
+            font-size: 0.7rem;
+          }
+        }
+        button {
+          color: white;
+          background-color: black;
+          border: none;
+          outline: none;
+          padding: 1rem 3rem;
+          width: 100%;
+          font-size: 0.8rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+  
+          &:hover {
+            color: black;
+            border: 1px solid black;
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+  
+  

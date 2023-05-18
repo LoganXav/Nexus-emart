@@ -1,39 +1,33 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Cart.scss";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import { increaseQuantity, decreaseQuantity, removeFromCart } from "../../redux/cartReducer" 
+import {loadStripe} from '@stripe/stripe-js';
+import { makeRequest } from "../../makeRequest"
+
+
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110,
-      date: "April 24, 2023",
-      stockStatus: true,
-    },
-    {
-      id: 2,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110,
-      date: "April 24, 2023",
-      stockStatus: true,
-    },
-    {
-      id: 3,
-      name: "Drone",
-      img: "../../assets/spy-drone.png",
-      price: 110,
-      date: "April 24, 2023",
-      stockStatus: false,
-    },
-  ]);
 
-  const removeItem = (id) => {
-    const updatedItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedItems);
-  };
+  const cartItems = useSelector(state => state.cart.products)
+  const dispatch = useDispatch()
+  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const stripePromise = loadStripe('pk_test_51N4ZeAJ7w1xo6cigIFo0bwK5Ca41oOL71d1BL8xQc92eGixFj66k9DHYFPz3MOW4GnMhe5labVPOm7u6lLk3iYQ700yRY8GD5M')
+    
+  const handlePayment = async () => {
+      try{
+        const stripe = await stripePromise
+        const res = await makeRequest.post("/orders", {
+          cartItems,
+        })
+
+        await stripe.redirectToCheckout({
+          sessionId: res.data.stripeSession.id,
+        })
+      } catch (err) {
+        console.log(err, "error")
+      }
+    }
   return (
     <div className="cart">
       {cartItems.length === 0 ? (
@@ -48,6 +42,7 @@ const Cart = () => {
             <table>
               <thead>
                 <tr className="table-row">
+                  <th></th>
                   <th>Products</th>
                   <th>Price</th>
                   <th>Quantity</th>
@@ -59,22 +54,24 @@ const Cart = () => {
                   <tr className="table-row">
                     <td>
                       <div className="image-row">
-                        <span onClick={() => removeItem(item.id)}><i className="ri-close-line"></i></span>
+                        <span onClick={() => dispatch(removeFromCart(item.id))}><i className="ri-close-line"></i></span>
+                        <Link className="link" to={`/product/${item.id}`}>
                         <div className="image">
-                          <img src={item.img} alt="" />
+                          <img src={import.meta.env.VITE_APP_UPLOAD_URL + item.img} alt="" />
                         </div>
-                        <p>{item.name}</p>
+                        </Link>
                       </div>
                     </td>
-                    <td>${item.price}.00</td>
+                        <td>{item.title}</td>
+                    <td>N {item.price}</td>
                     <td>
                       <div className="quantity">
-                        <p className="sign">-</p>
-                        <p className="count">2</p>
-                        <p className="sign">+</p>
+                        <p onClick={() => dispatch(decreaseQuantity({id: item.id, quantity: 1}))} className="sign">-</p>
+                        <p className="count">{item.quantity}</p>
+                        <p onClick={() => dispatch(increaseQuantity({id: item.id, quantity: 1}))} className="sign">+</p>
                       </div>
                     </td>
-                    <td>$400.00</td>
+                    <td>N {item.quantity * item.price}</td>
                   </tr>
                 </tbody>
               ))}
@@ -89,7 +86,7 @@ const Cart = () => {
             <hr />
             <div className="subtotal">
               <p>Subtotal</p>
-              <p>$180.00</p>
+              <p>{cartTotal}</p>
             </div>
             <hr />
             <div className="shipping">
@@ -97,7 +94,7 @@ const Cart = () => {
                 <p>Shipping</p>
                 <div className="subtotal">
                   <p>Flat rate:</p>
-                  <p>$10.00</p>
+                  <p>N 258</p>
                 </div>
                 <p>
                   Shipping to <b>NGA.</b>
@@ -108,9 +105,9 @@ const Cart = () => {
             <hr />
             <div className="subtotal">
               <p>Total</p>
-              <p>$190.00</p>
+              <p>N {cartTotal - 258}</p>
             </div>
-            <button>Proceed To Checkout</button>
+            <button onClick={handlePayment}>Proceed To Checkout</button>
           </div>
         </div>
       )}

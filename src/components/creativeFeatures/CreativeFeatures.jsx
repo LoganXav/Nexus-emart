@@ -1,9 +1,17 @@
 import './creativeFeatures.scss'
+import useFetch from "../../hooks/useFetch"
+
+
+
 const CreativeFeatures = () => {
+
+  const { data, loading, error } = useFetch("/products?populate=*&[filters][type][$eq]=creative")
+
+
     return ( 
         <div className="creative">
             <div className="left">
-                <img src="../../assets/oculus.png" alt="" />
+          {loading ? "loading..." : error ? "Something went wrong" : <img src={import.meta.env.VITE_APP_UPLOAD_URL+data[0]?.attributes?.img.data.attributes.url}  alt="sectionImg" />}
             </div>
             <div className="right">
                 <h1>Creative Features</h1>

@@ -1,48 +1,64 @@
 import "./Categories.scss";
+import useFetch from "../../hooks/useFetch";
+import { motion, AnimatePresence } from "framer-motion";
+
 const Categories = () => {
-  const categories = [
-    {
-      id: 1,
-      name: "Google speaker",
-      img: "../assets/google-speaker.png",
-    },
-    {
-      id: 2,
-      name: "Wireless headset",
-      img: "../assets/wireless-headset.png",
-    },
-    {
-      id: 3,
-      name: "Smart watch",
-      img: "../assets/smart-watch.png",
-    },
-    {
-      id: 4,
-      name: "Digital camera",
-      img: "../assets/digital-camera.png",
-    },
-    {
-      id: 5,
-      name: "Spy drone",
-      img: "../assets/spy-drone.png",
-    },
-  ];
+  const { data, loading, error } = useFetch("/categories?populate=*");
 
   return (
-    <div className="categories">
-      <div className="top">
-        <h1>Shop by categories</h1>
-        <p>We offer a wide range of electronics products to meet all your needs. Below, you'll find our categories section, where you can easily browse and shop for your favorite products.</p>
-      </div>
-      <div className="bottom">
-        {categories.map((category) => (
-          <div className="category" key={category.id}>
-            <div className="image">
-              <img src={category.img} alt="" />
-            </div>
-            <h3>{category.name}</h3>
+    <div className="categories-container">
+      <div className="categories">
+        <div className="top">
+          <h1>Shop by categories</h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{
+              ease: [0.6, 0.01, 0.05, 0.9],
+              duration: 1,
+            }}
+            viewport={{ once: true }}
+          >
+            We offer a wide range of electronics products to meet all your
+            needs. Below, you'll find our categories section, where you can
+            easily browse and shop for your favourite products.
+          </motion.p>
+        </div>
+        {loading ? (
+          "loading..."
+        ) : error ? (
+          "Something went wrong"
+        ) : (
+          <div className="bottom">
+            <AnimatePresence>
+              {data.map((category, index) => (
+                <motion.div
+                  className="category"
+                  key={category.id}
+                  initial={{ opacity: 0, y: 200 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0 + index * 0.3,
+                    ease: [0.6, 0.01, 0.05, 0.9],
+                    duration: 1,
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <div className="image">
+                    <img
+                      src={
+                        import.meta.env.VITE_APP_UPLOAD_URL +
+                        category?.attributes?.img?.data?.attributes?.url
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <h3>{category?.attributes?.title}</h3>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

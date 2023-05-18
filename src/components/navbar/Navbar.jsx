@@ -1,15 +1,38 @@
+// STYLES IMPORT
 import "./Navbar.scss";
+
+// HOOKS IMPORTS
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+// NAVIGATION MENU IMPORT
+import NavigationMenu from "./navigationMenu/NavigationMenu";
+
+// SEARCH MODAL IMPORT
+import SearchModal from "./searchModal/SearchModal";
+
+// SIGN IN MODAL IMPORT
+import UserSignInModal from "./userSignInModal/UserSignInModal";
+
+// CART MENU IMPORT
+import CartMenu from "./cartMenu/CartMenu";
 
 const Navbar = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [userOpen, setUserOpen] = useState(false);
-  const [userRegister, setUserRegister] = useState(false);
-  const [active, setActive] = useState(false);
-  const [cartModal, setCartModal] = useState(false);
+  // REDUX STATES
+  const wishlistItems = useSelector((state) => state.wishlist.products);
+  const { currentUser } = useSelector((state) => state.user);
+
+
+  
+  // INVOKES USENAVIGATE FOR NAVIGATION
+  const navigate = useNavigate();
+  
+  // INVOKES USEL0CATION FOR THE NAVBAR
+  const {pathname} = useLocation()
 
   // NAVBAR SCROLL EFFECT
+  const [active, setActive] = useState(false);
   const isActive = () => {
     scrollY > 800 ? setActive(true) : setActive(false);
   };
@@ -21,138 +44,105 @@ const Navbar = () => {
     };
   }, []);
 
-  const { pathname } = useLocation();
+  //************************* USER SIGN IN MODAL *******************************//
+  const [userOpen, setUserOpen] = useState(false);
 
-  // USER SIGN IN MODAL
-  const modalRef = useRef();
-  const signinRef = useRef(null);
-  const registerRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setUserOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [modalRef]);
-
-  function handleSigninClick() {
-    setUserRegister(false);
-    signinRef.current.classList.remove("inactive");
-    registerRef.current.classList.remove("active");
-  }
-
-  function handleRegisterClick() {
-    setUserRegister(true);
-    registerRef.current.classList.add("active");
-    signinRef.current.classList.add("inactive");
-  }
-
-  // PASSWORD VISIBILITY
-  const [showPassword, setShowPassword] = useState(false);
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+  // HANDLES ROUTING TO USER DASHBOARD
+  const handleUserClick = () => {
+    if (currentUser !== null) {
+      navigate("/dashboard");
+    } else {
+      setUserOpen(true);
+    }
   };
 
-  // SEARCH MENU MODAL
-  useEffect(() => {
-    const search = document.querySelector(".search");
-    if (searchOpen == true) {
-      search.classList.add("active");
-    } else {
-      search.classList.remove("active");
-    }
-  }, [searchOpen]);
+  //************************* SEARCH MENU MODAL *******************************//
 
-  // CART MENU
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // HANDLES ROUTING TO SEARCH PAGE
+  const handleSearch = () => {
+    navigate("/search", { state: searchTerm, setState: setSearchTerm, replace: true });
+    setSearchTerm("");
+    setSearchOpen(false);
+  };
+
+   //************************* CART MENU *******************************//
+  const cartItems = useSelector((state) => state.cart.products);
   const cartRef = useRef(null);
   const cartContainerRef = useRef(null);
+
   const handleOpenCart = () => {
     cartRef.current.classList.add("active");
     cartContainerRef.current.classList.add("active");
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (cartRef.current && !cartRef.current.contains(event.target)) {
-        cartContainerRef.current.classList.remove("active");
-      }
-    };
+   //************************* NAVIGATION MENU *******************************//
+  const [navOpen, setNavOpen] = useState(false);
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [cartRef]);
-
-  const navigate = useNavigate();
-  const handleGoToCart = () => {
-    cartContainerRef.current.classList.remove("active");
-    navigate("/cart");
-  };
 
   return (
     <>
       <div className="navbar">
         {/* *********  NAVBAR TOP  ******** */}
-        <div className="top">
-          <div className="left">
-            Free delivery on orders over $1499. Don’t miss discount.
-          </div>
-          <div className="right">
-            <span>
-              <i className="ri-question-line"></i>
-              Help & Contact
-            </span>
+        <div className="top-container">
+          <div className="top">
+            <div className="left">
+              Free delivery on orders over $1499. Don’t miss discount.
+            </div>
+            <div className="right">
+              <span>
+                <i className="ri-question-line"></i>
+                Help & Contact
+              </span>
 
-            <span>
-              <i className="ri-price-tag-3-line"></i>
-              Deals of the day
-            </span>
+              <span>
+                <i className="ri-price-tag-3-line"></i>
+                Deals of the day
+              </span>
 
-            <span className="last">
-              <i className="ri-map-pin-line"></i>
-              Store location
-            </span>
+              <span className="last">
+                <i className="ri-map-pin-line"></i>
+                Store location
+              </span>
+            </div>
           </div>
         </div>
 
         {/* *********  NAVBAR BOTTOM  ******** */}
-
-        <div className={active ? "bottom active" : "bottom "}>
-          <div className="menu">
-            <i className="ri-menu-line"></i>
-          </div>
-          <Link className="link" to="/">
-            <div className="left">
-              <i className="ri-shopping-bag-line"></i>
-              <h2>Nexus</h2>
+        <div className={(active || pathname !== "/") ? "bottom active" : "bottom "}>
+          <div className="bottom-container">
+            <div className="menu">
+              <i
+                style={{ cursor: "pointer" }}
+                onClick={() => setNavOpen(!navOpen)}
+                className="ri-menu-line"
+              ></i>
             </div>
-          </Link>
-          <div className="right">
-            <div onClick={() => setSearchOpen(true)} className="nav-search">
-              <i className="ri-search-line"></i>
-            </div>
-            <div onClick={() => setUserOpen(true)}>
-              <i className="ri-user-3-line"></i>
-            </div>
-            <Link className="link" to="/wishlist">
-              <div className="parent nav-wish">
-                <i className="ri-heart-line"></i>
-                <span>5</span>
+            <Link className="link" to="/">
+              <div className="left">
+                <i className="ri-shopping-bag-line"></i>
+                <h2>Nexus</h2>
               </div>
             </Link>
-            <div onClick={handleOpenCart} className="parent">
-              <i className="ri-shopping-cart-line"></i>
-              <span>5</span>
+            <div className="right">
+              <div onClick={() => setSearchOpen(true)} className="nav-search">
+                <i className="ri-search-line"></i>
+              </div>
+              <div onClick={handleUserClick}>
+                <i className="ri-user-3-line"></i>
+              </div>
+              <Link className="link" to="/wishlist">
+                <div className="parent nav-wish">
+                  <i className="ri-heart-line"></i>
+                  <span>{wishlistItems.length}</span>
+                </div>
+              </Link>
+              <div onClick={handleOpenCart} className="parent">
+                <i className="ri-shopping-cart-line"></i>
+                <span>{cartItems.length}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -160,187 +150,39 @@ const Navbar = () => {
 
       {/* *********  SEARCH MODAL  ******** */}
 
-      <div className="search">
-        <input placeholder="Type Your Search" type="text" />
-        <button onClick={() => setSearchOpen(false)}>
-          <i className="ri-close-line"></i>
-        </button>
-      </div>
+      <SearchModal
+        searchOpen={searchOpen}
+        searchTerm={searchTerm}
+        setSearchOpen={setSearchOpen}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+      />
 
       {/* *********  USER SIGNIN MODAL  ******** */}
 
-      {userOpen && (
-        <div className="user-container">
-          <div ref={modalRef} className="user">
-            <div className="top">
-              <button
-                onClick={handleSigninClick}
-                ref={signinRef}
-                className="signin"
-              >
-                Sign in
-              </button>
-              <button
-                onClick={handleRegisterClick}
-                ref={registerRef}
-                className="register"
-              >
-                Register
-              </button>
-            </div>
-            {!userRegister ? (
-              <div className="bottom">
-                <label htmlFor="Username Or Email">Username Or Email</label>
-                <input placeholder="Username" type="text" />
-                <label htmlFor="Password">Password</label>
-                <div className="password">
-                  <input
-                    id="input"
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
-                  />
-                  {showPassword ? (
-                    <i
-                      onClick={toggleShowPassword}
-                      className="ri-eye-off-line"
-                    ></i>
-                  ) : (
-                    <i onClick={toggleShowPassword} className="ri-eye-line"></i>
-                  )}
-                </div>
-                <div className="forgot">
-                  <div className="left">
-                    <input type="checkbox" />
-                    <span>Remember me</span>
-                  </div>
-                  <span>
-                    <a>Lost your password?</a>
-                  </span>
-                </div>
-                <button>Login</button>
-              </div>
-            ) : (
-              <div className="bottom">
-                <label htmlFor="Username Or Email">Username *</label>
-                <input placeholder="Username" type="text" />
-                <label htmlFor="Email">Email Address *</label>
-                <input placeholder="Email Address" type="email" />
-                <label htmlFor="Password">Password *</label>
-                <div className="password">
-                  <input
-                    id="input"
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
-                  />
-                  {showPassword ? (
-                    <i
-                      onClick={toggleShowPassword}
-                      className="ri-eye-off-line"
-                    ></i>
-                  ) : (
-                    <i onClick={toggleShowPassword} className="ri-eye-line"></i>
-                  )}
-                </div>
-                <div className="forgot">
-                  <p>
-                    Your personal data will be used to support your experience
-                    throughout this website.
-                  </p>
-                </div>
-                <button>Register</button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <UserSignInModal 
+        userOpen={userOpen} 
+        setUserOpen={setUserOpen} 
+      />
 
-      {/* CART SIDE MENU */}
+      {/* *********  CART MENU  ******** */}
 
-      <div ref={cartContainerRef} className="cart-container">
-        <div ref={cartRef} className="cart-menu">
-          <div className="top">
-            <div className="header">
-              <p>Your Basket</p>
-              <p
-                onClick={() =>
-                  cartContainerRef.current.classList.remove("active")
-                }
-                style={{ cursor: "pointer" }}
-              >
-                <i className="ri-close-line"></i>
-              </p>
-            </div>
-            <div className="items">
-              <div className="left">
-                <div className="img-bg">
-                  <img src="../../assets/headset.png" alt="" />
-                </div>
-              </div>
-              <div className="right">
-                <div className="top">
-                  <p>
-                    <b>Drone</b>
-                  </p>
-                  <p>
-                    <i className="ri-close-line"></i>
-                  </p>
-                </div>
-                <div className="bottom">
-                  <div className="count">
-                    <span className="sign">-</span>
-                    <span>1</span>
-                    <span className="sign">+</span>
-                  </div>
-                  <p>$180.00</p>
-                </div>
-              </div>
-            </div>
-            <hr className="hr" />
-            <div className="items">
-              <div className="left">
-                <div className="img-bg">
-                  <img src="../../assets/headset.png" alt="" />
-                </div>
-              </div>
-              <div className="right">
-                <div className="top">
-                  <p>
-                    <b>Drone</b>
-                  </p>
-                  <p>
-                    <i className="ri-close-line"></i>
-                  </p>
-                </div>
-                <div className="bottom">
-                  <div className="count">
-                    <span className="sign">-</span>
-                    <span>1</span>
-                    <span className="sign">+</span>
-                  </div>
-                  <p>$180.00</p>
-                </div>
-              </div>
-            </div>
-            <hr className="hr" />
-          </div>
-          <div className="bottom-pay">
-            <p>$360.00</p>
-            <hr />
-            <div className="total">
-              <p>
-                <b>Subtotal:</b>
-              </p>
-              <p>
-                <b>$360.00</b>
-              </p>
-            </div>
-            <button className="toCart" onClick={handleGoToCart}>
-              View Cart
-            </button>
-            <button className="checkout">Checkout</button>
-          </div>
-        </div>
-      </div>
+      <CartMenu 
+        cartRef={cartRef} 
+        cartContainerRef={cartContainerRef} 
+        cartItems={cartItems} 
+      />
+
+       {/* *********  NAVIGATION MENU  ******** */}
+
+      <NavigationMenu 
+        navOpen={navOpen} 
+        setNavOpen={setNavOpen}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+        wishlistItems={wishlistItems}
+      />
     </>
   );
 };

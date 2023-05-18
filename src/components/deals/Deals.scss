@@ -1,48 +1,47 @@
-.deals{
+.deals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 3rem;
+  margin: 8rem auto;
+  @media (max-width: 540px) {
+    margin-top: 4rem;
+  }
+
+  .top {
     display: flex;
     flex-direction: column;
-    gap: 10vh;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    gap: 3rem;
-    margin: 4rem auto;
+    gap: 2rem;
 
-    .top{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        p{
-            font-weight: 300;
-            max-width: 80%;
-            text-align: center;
-        }
+    h2 {
+      font-size: 2rem;
     }
-    .bottom{
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        width: 98%;
-        // padding: 0 1.5rem;
-        margin: 0 auto;
+    p {
+      font-size: 0.8rem;
+      font-weight: 300;
+      max-width: 80%;
+      text-align: center;
     }
-    button{
-        padding: 1rem 2.5rem;
-        background-color: transparent;
-        border: 1px solid black;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        outline: none;
-        font-weight: bold;
-        font-size: .8rem;
+  }
+  .bottom {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+  button {
+    padding: 1rem 2.5rem;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+    font-size: 0.8rem;
 
-        &:hover{
-            transform: translateY(-15%);
-            color: white;
-            background-color: black;
-            border: none;
-        }
-    }
+  }
 }
