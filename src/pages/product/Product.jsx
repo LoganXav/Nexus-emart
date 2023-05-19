@@ -22,7 +22,6 @@ const Product = () => {
     }
   }, []);
 
-  console.log(data)
   return (
     <div ref={divRef} className="product">
       {loading ? (

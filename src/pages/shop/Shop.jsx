@@ -39,7 +39,7 @@ const Shop = () => {
         </div>
         <div className="filter-options">
           <div className="left">
-            <p>Showing all 10 results</p>
+            <p>Showing all {data.length} results</p>
           </div>
           <div className="right">
             <span onClick={() => setFilterOpen(!filterOpen)}>Filters</span>
@@ -73,6 +73,7 @@ const Shop = () => {
                 step="1000"
                 value={value}
                 onChange={handleChange}
+                className= "input"
               />
               <div className="price-container">
                 <input type="text" defaultValue={`N ${1000}`} />
