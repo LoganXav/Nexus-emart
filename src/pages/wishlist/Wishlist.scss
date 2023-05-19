@@ -26,7 +26,6 @@
         padding: 1rem 2rem;
       }
       p {
-        font-weight: 300;
         font-size: 1rem;
         color: black;
       }
@@ -38,7 +37,7 @@
       border: none;
       cursor: pointer;
       outline: none;
-      font-size: 0.7rem;
+      font-size: 1rem;
       align-self: flex-start;
 
       @media (max-width: 900px) {
