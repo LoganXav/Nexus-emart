@@ -11,7 +11,7 @@ const NewCollection = () => {
   return (
     <div className="newCollection">
       <div className="top">
-        <h1>New collection</h1>
+        <h3>New collection</h3>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

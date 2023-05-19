@@ -126,10 +126,10 @@ const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
             <hr />
             <div className="total">
               <p>
-                <b>Subtotal:</b>
+                Subtotal:
               </p>
               <p>
-                <b>N {cartTotal}</b>
+                N {cartTotal}
               </p>
             </div>
             <button className="toCart" onClick={handleGoToCart}>

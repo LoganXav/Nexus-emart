@@ -54,6 +54,9 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        p{
+          color: black;
+        }
         .product-name {
           display: flex;
           justify-content: space-between;
@@ -78,9 +81,10 @@
           }
         }
         .quantity {
-          font-weight: bold;
           font-size: 0.8rem;
           margin-bottom: -0.5rem;
+          color: black;
+
         }
         .addCart {
           display: flex;
@@ -194,7 +198,6 @@
     flex-direction: column;
     gap: 1rem;
     p {
-      font-weight: 200;
     }
     .product-details {
       display: flex;
@@ -254,6 +257,7 @@
           gap: 1rem;
           p {
             max-width: 60%;
+         
             @media (max-width: 550px) {
               max-width: 100%;
             }
@@ -310,6 +314,7 @@
           }
           p{
             font-size: .8rem;
+            color: black;
           }
           textarea {
             padding: 1rem;

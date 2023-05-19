@@ -34,8 +34,8 @@ const Card = ({ item, i }) => {
                 item[i]?.attributes?.price + 2000}
             </p>
           )}
-          <p>
-            <b>N {item[i]?.attributes?.price}1</b>
+          <p className="p">
+            N {item[i]?.attributes?.price}
           </p>
         </div>
       </Link>

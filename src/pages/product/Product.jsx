@@ -1,5 +1,5 @@
 import "./Product.scss";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,9 +14,17 @@ const Product = () => {
   const [selectedDetail, setSelectedDetail] = useState("description");
   const { data, loading, error } = useFetch(`/products/${id}?populate=*`);
 
+    const divRef = useRef(null);
+
+  useEffect(() => {
+    if (divRef.current) {
+      divRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   console.log(data)
   return (
-    <div className="product">
+    <div ref={divRef} className="product">
       {loading ? (
         "loading..."
       ) : (
@@ -225,7 +233,7 @@ const Product = () => {
                     <hr />
                   </div>
                   <div className="add-review">
-                    <h4>Be The First To Review "Alexa Smart Speaker"</h4>
+                    <h4>Be The First To Review "{data?.attributes?.title}"</h4>
                     <p>
                       Your Email Address will not be published. Required fields
                       are marked *

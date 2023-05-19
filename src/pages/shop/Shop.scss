@@ -17,11 +17,24 @@
       justify-content: space-between;
       align-items: center;
       .left {
-        font-weight: 300;
       }
       .right {
         display: flex;
         gap: 1rem;
+        @media (max-width: 540px) {
+          position: fixed;
+          bottom: 0vw;
+          z-index: 20;
+          width: 100vw;
+          background-color: white;
+          font-size: 1rem;
+          padding: 1rem;
+          justify-content: center;
+          gap: 2rem;
+          box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+          -webkit-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+          -moz-box-shadow: 0px -1px 73px -9px rgba(0, 0, 0, 0.14);
+        }
         span{
           cursor: pointer;
         }
@@ -34,11 +47,19 @@
     flex-direction: column;
     gap: 2rem;
     margin: 0 auto;
+    @media (max-width: 768px) {
+      width: 90vw
+    }
 
     .headings {
       display: flex;
       justify-content: space-between;
       gap: 20rem;
+      font-size: 1rem;
+      @media (max-width: 768px) {
+        gap: 0;
+
+      }
     }
 
     .options {
@@ -48,6 +69,12 @@
       .category-options {
         display: flex;
         gap: 1rem;
+        span{
+          color: black
+        }
+        @media (max-width: 768px) {
+          flex-direction: column;
+        }
 
         span{ 
           cursor: pointer; 

@@ -34,19 +34,11 @@
         font-weight: lighter;
       }
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: bold;
-
-      @media (max-width: 1280px) {
-        font-size: 1.5rem;
-      }
-      @media (max-width: 540px) {
-        font-size: 1.3rem;
-      }
     }
     p {
-      font-size: 0.8rem;
-      font-weight: 300;
+      font-size: 1rem;
       text-align: center;
       max-width: 75%;
 

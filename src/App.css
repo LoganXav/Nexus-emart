@@ -9,7 +9,15 @@ body{
     overflow-x: hidden;
 }
 h1, h2, h3{
-    font-family: 'Playfair Display', serif;
+    font-family: 'Abhaya Libre', serif;
+}
+span, p, label, input, button, a, td, th{
+    font-family: 'Jost', sans-serif;
+    color: rgb(103, 103, 103);
+}
+label, input, button, a{
+    font-family: 'Jost', sans-serif;
+    color: black;
 }
 
 .link{
