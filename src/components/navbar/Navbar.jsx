@@ -123,7 +123,7 @@ const Navbar = () => {
             <Link className="link" to="/">
               <div className="left">
                 <i className="ri-shopping-bag-line"></i>
-                <h2>Nexus</h2>
+                <p>nexus</p>
               </div>
             </Link>
             <div className="right">

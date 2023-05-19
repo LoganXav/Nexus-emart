@@ -30,7 +30,7 @@ const NavigationMenu = ({ navOpen, setNavOpen, searchTerm, setSearchTerm, handle
             <div className="header">
                 <div className="left">
                 <i className="ri-shopping-bag-line"></i>
-                <h2>Nexus</h2>
+                <p>nexus</p>
               </div>
               <i
                 style={{ cursor: "pointer" }}
