@@ -4,7 +4,7 @@ import "./UserSignInModal.scss";
 // HOOKS IMPORTS
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // REDUCER ACTIONS IMPORTS
 import {
@@ -22,6 +22,9 @@ const UserSignInModal = ({
 }) => {
   // INVOKES USEDISPATCH HOOK FOR REDUCER ACTIONS
   const dispatch = useDispatch();
+  
+  // INVOKES USESELECTOR HOOK TO ACCESS GLOBAL STATE
+  const { error } = useSelector((state) => state.user)
 
   // INVOKES USENAVIGATE HOOK FOR NAVIGATION
   const navigate = useNavigate();
@@ -194,6 +197,7 @@ const UserSignInModal = ({
                     <a>Lost your password?</a>
                   </span>
                 </div>
+                {error && <span>Invalid email or password.</span>}
                 <button onClick={handleSignIn}>Login</button>
               </div>
             ) : (
@@ -239,6 +243,7 @@ const UserSignInModal = ({
                     throughout this website.
                   </p>
                 </div>
+            
                 <button onClick={handleRegister}>Register</button>
               </div>
             )}
