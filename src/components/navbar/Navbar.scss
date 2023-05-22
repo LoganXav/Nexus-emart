@@ -90,10 +90,6 @@
         gap: .3rem;
         flex-direction: row;
         font-size: 2rem;
-
-        @media (max-width: 500px) {
-          font-size: 2rem;
-        }
         p {
           font-size: 2rem;
           font-family: 'Jost', sans-serif;

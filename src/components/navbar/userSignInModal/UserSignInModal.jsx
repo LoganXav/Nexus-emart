@@ -11,20 +11,18 @@ import {
   loginStart,
   loginSuccess,
   loginFail,
+  logout,
 } from "../../../redux/userReducer";
 
 // HTTP REQUEST IMPORT
 import { makeRequest } from "../../../makeRequest";
 
-const UserSignInModal = ({
-  userOpen,
-  setUserOpen,
-}) => {
+const UserSignInModal = ({ userOpen, setUserOpen }) => {
   // INVOKES USEDISPATCH HOOK FOR REDUCER ACTIONS
   const dispatch = useDispatch();
-  
+
   // INVOKES USESELECTOR HOOK TO ACCESS GLOBAL STATE
-  const { error } = useSelector((state) => state.user)
+  const { error } = useSelector((state) => state.user);
 
   // INVOKES USENAVIGATE HOOK FOR NAVIGATION
   const navigate = useNavigate();
@@ -81,7 +79,10 @@ const UserSignInModal = ({
         },
       });
       dispatch(loginSuccess(res.data));
-      setSignInInputs({});
+      setSignInInputs({
+        identifier: "",
+        password: "",
+      });
       setUserOpen(false);
       navigate("/dashboard");
     } catch (err) {
@@ -99,6 +100,16 @@ const UserSignInModal = ({
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setUserOpen(false);
+        setSignInInputs({
+          identifier: "",
+          password: "",
+        });
+        setInputs({
+          username: "",
+          email: "",
+          password: "",
+        });
+        dispatch(logout());
       }
     };
 
@@ -115,12 +126,23 @@ const UserSignInModal = ({
     setUserRegister(false);
     signinRef.current.classList.remove("inactive");
     registerRef.current.classList.remove("active");
+    setInputs({
+      username: "",
+      email: "",
+      password: "",
+    });
+    dispatch(logout());
   }
 
   function handleRegisterClick() {
     setUserRegister(true);
     registerRef.current.classList.add("active");
     signinRef.current.classList.add("inactive");
+    setSignInInputs({
+      identifier: "",
+      password: "",
+    });
+    dispatch(logout());
   }
 
   // HANDLES PASSWORD VISIBILITY
@@ -153,7 +175,7 @@ const UserSignInModal = ({
             </div>
             {!userRegister ? (
               <div className="bottom">
-                <label htmlFor="Username Or Email">Username Or Email</label>
+                <label htmlFor="Username Or Email">Username Or Email <span className="red">*</span></label>
                 <input
                   placeholder="Username"
                   onChange={handleInput}
@@ -165,7 +187,7 @@ const UserSignInModal = ({
                   }
                   type="text"
                 />
-                <label htmlFor="Password">Password</label>
+                <label htmlFor="Password">Password <span className="red">*</span></label>
                 <div className="password">
                   <input
                     id="input"
@@ -202,7 +224,7 @@ const UserSignInModal = ({
               </div>
             ) : (
               <div className="bottom">
-                <label htmlFor="Username Or Email">Username *</label>
+                <label htmlFor="Username Or Email">Username <span className="red">*</span></label>
                 <input
                   name="username"
                   value={inputs.username !== null ? inputs.username : ""}
@@ -210,7 +232,7 @@ const UserSignInModal = ({
                   placeholder="Username"
                   type="text"
                 />
-                <label htmlFor="Email">Email Address *</label>
+                <label htmlFor="Email">Email Address <span className="red">*</span></label>
                 <input
                   name="email"
                   value={inputs.email !== null ? inputs.email : ""}
@@ -218,7 +240,7 @@ const UserSignInModal = ({
                   placeholder="Email Address"
                   type="email"
                 />
-                <label htmlFor="Password">Password *</label>
+                <label htmlFor="Password">Password <span className="red">*</span></label>
                 <div className="password">
                   <input
                     id="input"
@@ -243,7 +265,7 @@ const UserSignInModal = ({
                     throughout this website.
                   </p>
                 </div>
-            
+                {error && <span>User alreadey exists.</span>}
                 <button onClick={handleRegister}>Register</button>
               </div>
             )}

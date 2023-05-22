@@ -64,7 +64,7 @@
     }
     table {
       border-collapse: collapse;
-      font-size: 0.8rem;
+      font-size: 1rem;
       width: 100%;
       @media (max-width: 1024px) {
         display: flex;
@@ -160,7 +160,7 @@
             border: none;
             cursor: pointer;
             outline: none;
-            font-size: 0.7rem;
+            font-size: 1rem;
             align-self: flex-start;
 
             @media (max-width: 1024px) {

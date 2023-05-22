@@ -10,7 +10,6 @@ const Wishlist = () => {
   const dispatch = useDispatch()
 
   const likedItems = useSelector((state) => state.wishlist.products)
-  console.log(likedItems)
 
   return (
     <div className="wishlist">
@@ -54,7 +53,7 @@ const Wishlist = () => {
                   <td>{item.title}</td>
                   <td>N {item.price}</td>
                   <td>{item.date}</td>
-                  <td>{item.inStock ? <p>In Stock {<i class="ri-check-line"></i>} </p> : "Out of Stock"}</td>
+                  <td>{item.inStock ? <p>In Stock {<i className="ri-check-line"></i>} </p> : "Out of Stock"}</td>
                   <td>
                     <button  onClick={() =>
                       dispatch(

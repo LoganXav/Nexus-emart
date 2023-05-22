@@ -2,9 +2,12 @@ import "./Product.scss";
 import { useState, useRef, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
 import { addToWishlist } from "../../redux/wishlistReducer";
+import { loadStripe } from "@stripe/stripe-js";
+import { makeRequest } from "../../makeRequest";
+import Alert from "../../components/alert/Alert"
 
 const Product = () => {
   const { id } = useParams();
@@ -14,13 +17,60 @@ const Product = () => {
   const [selectedDetail, setSelectedDetail] = useState("description");
   const { data, loading, error } = useFetch(`/products/${id}?populate=*`);
 
-    const divRef = useRef(null);
+  const divRef = useRef(null);
 
   useEffect(() => {
     if (divRef.current) {
       divRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
+
+    // CHECKOUT PAYMENT
+  const { currentUser } = useSelector((state) => state.user);
+
+  const stripePromise = loadStripe(
+    "pk_test_51N4ZeAJ7w1xo6cigIFo0bwK5Ca41oOL71d1BL8xQc92eGixFj66k9DHYFPz3MOW4GnMhe5labVPOm7u6lLk3iYQ700yRY8GD5M"
+  );
+
+  const handlePayment = async () => {
+    try {
+      if (currentUser) {
+
+        const stripe = await stripePromise;
+        const res = await makeRequest.post("/orders", {
+          data,
+        });
+        
+        await stripe.redirectToCheckout({
+          sessionId: res.data.stripeSession.id,
+        });
+      } else {
+        setAlert(true)
+      }
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+
+    // ALERT MODAL
+  const [alert, setAlert] = useState(false)
+  
+//   console.log(data)
+  
+//  useEffect(() => {
+
+//   if(data){
+
+//     const si = {
+//     id: data.id,
+//     title: data.attributes.title,
+//     price: data.attributes.price,
+//     img: data.attributes.img.data.attributes.url,
+//     quantity: 1
+//   }
+//   console.log(si)
+//   }
+// }, [data])
 
   return (
     <div ref={divRef} className="product">
@@ -53,19 +103,22 @@ const Product = () => {
                 <div className="product-name">
                   <h2>{data?.attributes?.title}</h2>
                   <span className="like">
-                    <i  onClick={() =>
-                      dispatch(
-                        addToWishlist({
-                          id: data.id,
-                          title: data.attributes.title,
-                          price: data.attributes.price,
-                          img: data.attributes.img.data.attributes.url,
-                          date: data.attributes.createdAt,
-                          inStock: data.attributes.inStock,
-                          quantity,
-                        })
-                      )
-                    } className="ri-heart-line"></i>
+                    <i
+                      onClick={() =>
+                        dispatch(
+                          addToWishlist({
+                            id: data.id,
+                            title: data.attributes.title,
+                            price: data.attributes.price,
+                            img: data.attributes.img.data.attributes.url,
+                            date: data.attributes.createdAt,
+                            inStock: data.attributes.inStock,
+                            quantity,
+                          })
+                        )
+                      }
+                      className="ri-heart-line"
+                    ></i>
                   </span>
                 </div>
                 <p>N {data?.attributes?.price}</p>
@@ -104,7 +157,7 @@ const Product = () => {
                     Add To Cart
                   </button>
                 </div>
-                <button>Buy Now</button>
+                <button onClick={handlePayment}>Buy Now</button>
                 <div className="shipping">
                   <p>
                     <b>Estimated Delivery:</b> Within 5-7 days
@@ -273,6 +326,7 @@ const Product = () => {
           </div>
         </>
       )}
+        {alert && <Alert setAlert = {setAlert} />}
     </div>
   );
 };

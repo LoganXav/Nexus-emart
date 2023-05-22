@@ -44,12 +44,64 @@
     }
     span {
       position: absolute;
-      top: 2rem;
-      right: 0;
+      top: 1rem;
+      right: 0rem;
       color: white;
       background-color: black;
       padding: 4px 9px;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
+    }
+    .options {
+      position: absolute;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+      width: 90%;
+      justify-content: space-between;
+      .like {
+        align-self: flex-start;
+        background-color: white;
+        color: black;
+        border-radius: 50%;
+        padding: 0.5rem;
+        font-size: .8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s linear;
+
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+      .bag {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.5rem 0.7rem;
+        background-color: white;
+        color: black;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        font-size: .8rem;
+        align-self: center;
+        transition: all 0.2s linear;
+
+        &:hover {
+          background-color: black;
+          color: white !important;
+        }
+        p {
+          // color: black;
+          &:hover {
+            color: white;
+          }
+        }
+      }
     }
   }
   h3 {

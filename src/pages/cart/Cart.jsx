@@ -1,33 +1,57 @@
 import "./Cart.scss";
+import { useState } from "react"
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
-import { increaseQuantity, decreaseQuantity, removeFromCart } from "../../redux/cartReducer" 
-import {loadStripe} from '@stripe/stripe-js';
-import { makeRequest } from "../../makeRequest"
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+} from "../../redux/cartReducer";
+import { loadStripe } from "@stripe/stripe-js";
+import { makeRequest } from "../../makeRequest";
+import Alert from "../../components/alert/Alert"
 
 const Cart = () => {
+  const dispatch = useDispatch();
 
-  const cartItems = useSelector(state => state.cart.products)
-  const dispatch = useDispatch()
-  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  // CHECKOUT PAYMENT
+  const cartItems = useSelector((state) => state.cart.products);
+  const { currentUser } = useSelector((state) => state.user);
 
-  const stripePromise = loadStripe('pk_test_51N4ZeAJ7w1xo6cigIFo0bwK5Ca41oOL71d1BL8xQc92eGixFj66k9DHYFPz3MOW4GnMhe5labVPOm7u6lLk3iYQ700yRY8GD5M')
-    
+  const stripePromise = loadStripe(
+    "pk_test_51N4ZeAJ7w1xo6cigIFo0bwK5Ca41oOL71d1BL8xQc92eGixFj66k9DHYFPz3MOW4GnMhe5labVPOm7u6lLk3iYQ700yRY8GD5M"
+  );
+
   const handlePayment = async () => {
-      try{
-        const stripe = await stripePromise
+    try {
+      if (currentUser) {
+
+        const stripe = await stripePromise;
         const res = await makeRequest.post("/orders", {
           cartItems,
-        })
-
+        });
+        
         await stripe.redirectToCheckout({
           sessionId: res.data.stripeSession.id,
-        })
-      } catch (err) {
-        console.log(err, "error")
+        });
+      } else {
+        setAlert(true)
       }
+    } catch (err) {
+      console.log(err, "error");
     }
+  };
+  console.log(cartItems)
+
+  // CART TOTAL PRICE
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  // ALERT MODAL
+  const [alert, setAlert] = useState(false)
+
   return (
     <div className="cart">
       {cartItems.length === 0 ? (
@@ -54,21 +78,46 @@ const Cart = () => {
                   <tr className="table-row">
                     <td>
                       <div className="image-row">
-                        <span onClick={() => dispatch(removeFromCart(item.id))}><i className="ri-close-line"></i></span>
+                        <span onClick={() => dispatch(removeFromCart(item.id))}>
+                          <i className="ri-close-line"></i>
+                        </span>
                         <Link className="link" to={`/product/${item.id}`}>
-                        <div className="image">
-                          <img src={import.meta.env.VITE_APP_UPLOAD_URL + item.img} alt="" />
-                        </div>
+                          <div className="image">
+                            <img
+                              src={
+                                import.meta.env.VITE_APP_UPLOAD_URL + item.img
+                              }
+                              alt=""
+                            />
+                          </div>
                         </Link>
                       </div>
                     </td>
-                        <td>{item.title}</td>
+                    <td>{item.title}</td>
                     <td>N {item.price}</td>
                     <td>
                       <div className="quantity">
-                        <p onClick={() => dispatch(decreaseQuantity({id: item.id, quantity: 1}))} className="sign">-</p>
+                        <p
+                          onClick={() =>
+                            dispatch(
+                              decreaseQuantity({ id: item.id, quantity: 1 })
+                            )
+                          }
+                          className="sign"
+                        >
+                          -
+                        </p>
                         <p className="count">{item.quantity}</p>
-                        <p onClick={() => dispatch(increaseQuantity({id: item.id, quantity: 1}))} className="sign">+</p>
+                        <p
+                          onClick={() =>
+                            dispatch(
+                              increaseQuantity({ id: item.id, quantity: 1 })
+                            )
+                          }
+                          className="sign"
+                        >
+                          +
+                        </p>
                       </div>
                     </td>
                     <td>N {item.quantity * item.price}</td>
@@ -111,6 +160,7 @@ const Cart = () => {
           </div>
         </div>
       )}
+      {alert && <Alert setAlert = {setAlert} />}
     </div>
   );
 };

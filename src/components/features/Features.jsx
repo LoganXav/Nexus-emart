@@ -11,8 +11,8 @@ const Features = () => {
     },
     {
       id: 2,
-      name: "100% Original product",
-      desc: "Rest assured that all products on our website are 100% original and sourced directly from the manufacturer.",
+      name: "100% Original",
+      desc: "Rest assured that all products on our website are directly from the manufacturer.",
       icon: <i className="ri-award-line"></i>,
     },
 
