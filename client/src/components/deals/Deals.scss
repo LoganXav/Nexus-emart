@@ -1,0 +1,45 @@
+.deals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 3rem;
+  margin: 8rem auto;
+  @media (max-width: 540px) {
+    margin-top: 4rem;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    h2 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1rem;
+      max-width: 80%;
+      text-align: center;
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+  button {
+    padding: 1rem 2.5rem;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    outline: none;
+    font-size: 1rem;
+
+  }
+}

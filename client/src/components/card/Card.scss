@@ -1,0 +1,125 @@
+.card {
+  width: calc(100% / 4);
+  aspect-ratio: 1 / 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  @media (max-width: 768px) {
+    width: calc(100% / 2.5);
+  }
+
+  .image {
+    width: 100%;
+    background-color: rgb(241, 241, 237);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 80%;
+
+    img {
+      width: 300px;
+      object-fit: cover;
+      object-position: center;
+
+      @media (max-width: 1280px) {
+        width: 230px;
+      }
+      @media (max-width: 1024px) {
+        width: 180px;
+      }
+      @media (max-width: 840px) {
+        width: 160px;
+      }
+      @media (max-width: 600px) {
+        width: 200px;
+      }
+      @media (max-width: 540px) {
+        width: 150px;
+      }
+    }
+    span {
+      position: absolute;
+      top: 1rem;
+      right: 0rem;
+      color: white;
+      background-color: black;
+      padding: 4px 9px;
+      font-size: 0.8rem;
+    }
+    .options {
+      position: absolute;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+      width: 90%;
+      justify-content: space-between;
+      .like {
+        align-self: flex-start;
+        background-color: white;
+        color: black;
+        border-radius: 50%;
+        padding: 0.5rem;
+        font-size: .8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s linear;
+
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+      .bag {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.5rem 0.7rem;
+        background-color: white;
+        color: black;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        font-size: .8rem;
+        align-self: center;
+        transition: all 0.2s linear;
+
+        &:hover {
+          background-color: black;
+          color: white !important;
+        }
+        p {
+          // color: black;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  .price {
+    display: flex;
+    gap: 1rem;
+    font-weight: 200;
+    margin-top: -0.5rem;
+    font-size: 0.8rem;
+    .p {
+      color: black !important;
+      font-weight: 400;
+    }
+
+    .old {
+      text-decoration: line-through;
+    }
+  }
+}

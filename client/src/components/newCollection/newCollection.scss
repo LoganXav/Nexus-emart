@@ -1,0 +1,33 @@
+.newCollection {
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 3rem;
+  margin: 8rem auto;
+  @media (max-width: 540px) {
+    margin-top: 4rem;
+  }
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+    gap: 2rem;
+    
+    p {
+      font-size: 1rem;
+      max-width: 70%;
+    }
+  }
+}
+.bottom {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 90%;
+  margin: 0 auto;
+}
