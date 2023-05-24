@@ -219,7 +219,7 @@ const UserSignInModal = ({ userOpen, setUserOpen }) => {
                     <a>Lost your password?</a>
                   </span>
                 </div>
-                {error && <span>Invalid email or password.</span>}
+                {error && <span className="red">Invalid email or password.</span>}
                 <button onClick={handleSignIn}>Login</button>
               </div>
             ) : (
@@ -265,7 +265,7 @@ const UserSignInModal = ({ userOpen, setUserOpen }) => {
                     throughout this website.
                   </p>
                 </div>
-                {error && <span>User alreadey exists.</span>}
+                {error && <span className="red">User already exists.</span>}
                 <button onClick={handleRegister}>Register</button>
               </div>
             )}
