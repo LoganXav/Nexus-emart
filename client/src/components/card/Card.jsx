@@ -2,15 +2,18 @@ import "./Card.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
-import { addToWishlist } from "../../redux/wishlistReducer";
+import { addToWishlist, removeFromWishlist } from "../../redux/wishlistReducer";
 
 const Card = ({ item, i }) => {
   const [hover, setHover] = useState(false);
   const dispatch = useDispatch();
+  const likedItems = useSelector((state) => state.wishlist.products);
 
   const productId = item[i].id;
+
+  const isProductLiked = likedItems.some((item) => item.id === productId);
 
   const handleMouseEnter = () => {
     setHover(true);
@@ -28,16 +31,17 @@ const Card = ({ item, i }) => {
           className="image"
         >
           <Link to={`/product/${productId}`} className="link">
-          <img
-            src={
-              import.meta.env.VITE_APP_UPLOAD_URL +
-              item[i]?.attributes?.img?.data?.attributes?.url
-            }
-          />
+            <img
+              src={
+                import.meta.env.VITE_APP_UPLOAD_URL +
+                item[i]?.attributes?.img?.data?.attributes?.url
+              }
+            />
           </Link>
           {item[i]?.attributes.oldPrice && (
-            <span> 
-              - {(
+            <span>
+              -{" "}
+              {(
                 ((item[i]?.attributes?.oldPrice - item[i]?.attributes?.price) /
                   item[i]?.attributes?.oldPrice) *
                 100
@@ -62,21 +66,31 @@ const Card = ({ item, i }) => {
                   duration: 0.2,
                 }}
                 className="like"
-                onClick={() =>
-                  dispatch(
-                    addToWishlist({
-                      id: productId,
-                      title: item[i].attributes.title,
-                      price: item[i].attributes.price,
-                      img: item[i].attributes.img.data.attributes.url,
-                      date: item[i].attributes.createdAt,
-                      inStock: item[i].attributes.inStock,
-                      quantity: 1,
-                    })
-                  )
-                }
               >
-                <i className="ri-heart-line"></i>
+                {isProductLiked ? (
+                  <i
+                    onClick={() => dispatch(removeFromWishlist(item[i].id))}
+                    className="ri-heart-fill"
+                    style={{ color: "red" }}
+                  ></i>
+                ) : (
+                  <i
+                    onClick={() =>
+                      dispatch(
+                        addToWishlist({
+                          id: productId,
+                          title: item[i].attributes.title,
+                          price: item[i].attributes.price,
+                          img: item[i].attributes.img.data.attributes.url,
+                          date: item[i].attributes.createdAt,
+                          inStock: item[i].attributes.inStock,
+                          quantity: 1,
+                        })
+                      )
+                    }
+                    className="ri-heart-line"
+                  ></i>
+                )}
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -108,12 +122,12 @@ const Card = ({ item, i }) => {
         <div className="price">
           {item[i]?.attributes?.oldPrice && (
             <p className="old">
-              N{" "}
+              ${" "}
               {item[i]?.attributes?.oldPrice ||
-                item[i]?.attributes?.price + 2000}
+                item[i]?.attributes?.price + 20}.99
             </p>
           )}
-          <p className="p">N {item[i]?.attributes?.price}</p>
+          <p className="p">$ {item[i]?.attributes?.price}.99</p>
         </div>
       </div>
     </>

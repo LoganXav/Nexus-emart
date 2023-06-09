@@ -1,0 +1,25 @@
+.products{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 4rem auto;
+    max-width: 1500px;
+    gap: 3rem;
+    .header{
+        font-size: 1.5rem;
+    }
+    .bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+        .container{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+        }
+      }
+}

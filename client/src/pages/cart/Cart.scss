@@ -8,10 +8,12 @@
   min-height: 35rem;
 
   .container {
-    margin-top: 8rem auto;
+    margin: 8rem auto;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    max-width: 1500px;
+
 
     button {
       padding: 1rem 2.5rem;
@@ -31,6 +33,7 @@
     justify-content: space-between;
     gap: 1.5rem;
     margin: 8rem auto;
+    max-width: 1500px;
     width: 95vw;
     // height: 30rem;
     @media (max-width: 1024px) {

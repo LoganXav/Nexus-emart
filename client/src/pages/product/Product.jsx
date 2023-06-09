@@ -4,10 +4,12 @@ import useFetch from "../../hooks/useFetch";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
-import { addToWishlist } from "../../redux/wishlistReducer";
+import { addToWishlist, removeFromWishlist } from "../../redux/wishlistReducer";
 import { loadStripe } from "@stripe/stripe-js";
 import { makeRequest } from "../../makeRequest";
-import Alert from "../../components/alert/Alert"
+import Alert from "../../components/alert/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import { RelatedProducts } from "../../components/relatedProducts/RelatedProducts";
 
 const Product = () => {
   const { id } = useParams();
@@ -25,7 +27,7 @@ const Product = () => {
     }
   }, []);
 
-    // CHECKOUT PAYMENT
+  // CHECKOUT PAYMENT
   const { currentUser } = useSelector((state) => state.user);
 
   const stripePromise = loadStripe(
@@ -35,47 +37,52 @@ const Product = () => {
   const handlePayment = async () => {
     try {
       if (currentUser) {
-
         const stripe = await stripePromise;
         const res = await makeRequest.post("/orders", {
           data,
         });
-        
+
         await stripe.redirectToCheckout({
           sessionId: res.data.stripeSession.id,
         });
       } else {
-        setAlert(true)
+        setAlert(true);
       }
     } catch (err) {
       console.log(err, "error");
     }
   };
 
-    // ALERT MODAL
-  const [alert, setAlert] = useState(false)
-  
-//   console.log(data)
-  
-//  useEffect(() => {
+  // ALERT MODAL
+  const [alert, setAlert] = useState(false);
 
-//   if(data){
+  //   console.log(data)
 
-//     const si = {
-//     id: data.id,
-//     title: data.attributes.title,
-//     price: data.attributes.price,
-//     img: data.attributes.img.data.attributes.url,
-//     quantity: 1
-//   }
-//   console.log(si)
-//   }
-// }, [data])
+  //  useEffect(() => {
+
+  //   if(data){
+
+  //     const si = {
+  //     id: data.id,
+  //     title: data.attributes.title,
+  //     price: data.attributes.price,
+  //     img: data.attributes.img.data.attributes.url,
+  //     quantity: 1
+  //   }
+  //   console.log(si)
+  //   }
+  // }, [data])
+
+  //  ADD TO WISHLIST
+  const likedItems = useSelector((state) => state.wishlist.products);
+  const isProductLiked = likedItems.some((item) => item.id === data.id);
 
   return (
     <div ref={divRef} className="product">
       {loading ? (
-        "loading..."
+        <div className="circle">
+          <CircularProgress />
+        </div>
       ) : (
         <>
           <span className="breadcrumbs">
@@ -103,25 +110,72 @@ const Product = () => {
                 <div className="product-name">
                   <h2>{data?.attributes?.title}</h2>
                   <span className="like">
-                    <i
-                      onClick={() =>
-                        dispatch(
-                          addToWishlist({
-                            id: data.id,
-                            title: data.attributes.title,
-                            price: data.attributes.price,
-                            img: data.attributes.img.data.attributes.url,
-                            date: data.attributes.createdAt,
-                            inStock: data.attributes.inStock,
-                            quantity,
-                          })
-                        )
-                      }
-                      className="ri-heart-line"
-                    ></i>
+                    {isProductLiked ? (
+                      <i
+                        onClick={() => dispatch(removeFromWishlist(data.id))}
+                        className="ri-heart-fill"
+                        style={{ color: "red" }}
+                      ></i>
+                    ) : (
+                      <i
+                        onClick={() =>
+                          dispatch(
+                            addToWishlist({
+                              id: data.id,
+                              title: data.attributes.title,
+                              price: data.attributes.price,
+                              img: data.attributes.img.data.attributes.url,
+                              date: data.attributes.createdAt,
+                              inStock: data.attributes.inStock,
+                              quantity,
+                            })
+                          )
+                        }
+                        className="ri-heart-line"
+                      ></i>
+                    )}
                   </span>
                 </div>
-                <p>N {data?.attributes?.price}</p>
+                <div className="prices">
+                  {data?.attributes?.oldPrice ? (
+                    <>
+                      <p className="oldPrice">$ {data?.attributes?.oldPrice}.99</p>
+
+                      <p>${data?.attributes?.price}.99</p>
+                      <hr />
+                      <span className="green">
+                        -{" "}
+                        {(
+                          ((data?.attributes?.oldPrice -
+                            data?.attributes?.price) /
+                            data?.attributes?.oldPrice) *
+                          100
+                        ).toFixed(0)}
+                        %
+                      </span>
+                    </>
+                  ) : <p>$ {data?.attributes?.price}.99</p>}
+                </div>
+                <div className="hurry">
+                 {data?.attributes?.inStock ? <i
+                    className="ri-check-line"
+                    style={{
+                      color: "white",
+                      backgroundColor: "green",
+                      borderRadius: "50%",
+                      padding: ".1rem",
+                    }}
+                  ></i> : <i
+                  className="ri-close-line"
+                  style={{
+                    color: "white",
+                    backgroundColor: "red",
+                    borderRadius: "50%",
+                    padding: ".2rem",
+                  }}
+                ></i>}
+                { data?.attributes?.amountLeft && <span>Hurry up!! only { data?.attributes?.amountLeft} units left</span>}
+                </div>
                 <span className="quantity">Quantity</span>
                 <div className="addCart">
                   <div className="count">
@@ -157,10 +211,10 @@ const Product = () => {
                     Add To Cart
                   </button>
                 </div>
-                <button onClick={handlePayment}>Buy Now</button>
+                {/* <button onClick={handlePayment}>Buy Now</button> */}
                 <div className="shipping">
                   <p>
-                    <b>Estimated Delivery:</b> Within 5-7 days
+                    <b>Estimated Delivery:</b> Within 3 - 4 weeks
                   </p>
                   <p>
                     <b>Free shipping:</b> On orders over $1499 and above
@@ -178,6 +232,9 @@ const Product = () => {
                 </div>
                 <div className="payment">
                   <p>Online payment option</p>
+                  <div className="logos">
+                    <img src="https://emart.wpthemedemos.com/electronic-gadget/wp-content/uploads/sites/13/2023/02/Online-Payment.png" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -244,7 +301,10 @@ const Product = () => {
               {selectedDetail === "description" ? (
                 <div className="about-product">
                   <div className="about-image">
-                    <img src="../../assets/google-speaker.png" alt="" />
+                    <img src={
+                    import.meta.env.VITE_APP_UPLOAD_URL +
+                    data?.attributes?.[selectedImg].data.attributes.url
+                  } alt="" />
                   </div>
                   <div className="about-text">
                     <h2>Product details</h2>
@@ -257,23 +317,23 @@ const Product = () => {
                   <hr />
                   <div className="info">
                     <p>
-                      <b>Type</b>
+                      <b>Color</b>
                     </p>
-                    <p>Tubelar</p>
+                    <p>{data?.attributes?.color}</p>
                   </div>
                   <hr />
                   <div className="info">
                     <p>
                       <b>Connection Type</b>
                     </p>
-                    <p>Wireless, Bluetooth</p>
+                    <p>{data?.attributes?.connection}</p>
                   </div>
                   <hr />
                   <div className="info">
                     <p>
                       <b>Special Feature</b>
                     </p>
-                    <p>With Voice Control Built-in</p>
+                    <p>{data?.attributes?.specialFeature}</p>
                   </div>
                   <hr />
                 </div>
@@ -324,9 +384,12 @@ const Product = () => {
               ) : null}
             </div>
           </div>
+          <RelatedProducts
+            category={data?.attributes?.categories?.data[0].attributes.title}
+          />
         </>
       )}
-        {alert && <Alert setAlert = {setAlert} />}
+      {alert && <Alert setAlert={setAlert} />}
     </div>
   );
 };

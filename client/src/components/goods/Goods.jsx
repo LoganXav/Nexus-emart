@@ -7,8 +7,8 @@ const Goods = () => {
         <div className="left-details">
           <h2>Up to 60% off Electronics goods</h2>
           <p>
-            Wand crossbow phoenix levicorpus sirius. Easy raw-steak half-blood
-            petrified veela house lupin it.
+            Unbeatable savings! Enjoy up to 60% off on top-notch electronic
+            goods at our online store.
           </p>
           <Link className="link" to="/shop">
             <button>Shop Now</button>
@@ -19,9 +19,9 @@ const Goods = () => {
         <div className="right">
           <h2>Up to 60% off Electronic goods</h2>
           <img src="../../assets/spy-drone.png" alt="" />
-            <Link className="link" to="/shop">
-              <button>Shop Now</button>
-            </Link>
+          <Link className="link" to="/shop">
+            <button>Shop Now</button>
+          </Link>
         </div>
       </div>
     </div>

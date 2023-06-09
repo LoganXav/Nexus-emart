@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Shop = () => {
   const [value, setValue] = useState(100000);
@@ -42,12 +43,12 @@ const Shop = () => {
     <div ref={divRef} className="shop">
       <div className="top">
         <div className="breadcrumbs">
-          <div>
+          <span className="options">
             <Link className="link" to="/">
               Home
             </Link>{" "}
             / Shop
-          </div>
+          </span>
         </div>
         <div className="filter-options">
           <div className="left">
@@ -116,7 +117,7 @@ const Shop = () => {
       )}
       <div className="bottom-container">
         {loading ? (
-          "loading..."
+            <div className="circle"><CircularProgress /></div>
         ) : error ? (
           "Something went wrong"
         ) : (

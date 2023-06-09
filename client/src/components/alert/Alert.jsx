@@ -1,6 +1,6 @@
 import "./Alert.scss";
 
-const Alert = ({ setAlert }) => {
+const Alert = ({ setAlert, message}) => {
   return (
     <div className="alert-container">
       <div className="alert">
@@ -8,7 +8,7 @@ const Alert = ({ setAlert }) => {
           <h3>Please Note...</h3>
         </div>
         <div className="message">
-          <p>You need to sign in as a registered user before making a purchase!</p>
+          <p>{message}</p>
           <button onClick={() => setAlert(false)}>Close</button>
         </div>
       </div>

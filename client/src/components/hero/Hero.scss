@@ -15,9 +15,12 @@
 
 .hero {
   width: 90%;
+  max-width: 1500px;
   overflow: hidden;
-  margin-left: 4rem;
+  // margin-left: 4rem;
+  margin: 0 auto;
   margin-top: -2rem;
+
   display: flex;
   align-items: center;
 

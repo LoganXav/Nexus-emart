@@ -1,5 +1,6 @@
 // STYLES IMPORT
 import "./CartMenu.scss";
+import CircularProgress from '@mui/material/CircularProgress';
 
 // HOOKS IMPORTS
 import { useState, useEffect } from "react";
@@ -11,13 +12,14 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
+  resetCart
 } from "../../../redux/cartReducer";
 
 // PAYMENT IMPORTS
 import { loadStripe } from "@stripe/stripe-js";
 import { makeRequest } from "../../../makeRequest";
 
-// MODEAL IMPORT
+// MODAL IMPORT
 import Alert from "../../alert/Alert";
 
 const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
@@ -54,6 +56,7 @@ const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
   };
 
   // PROCEEDS TO CHECKOUT
+  const [loading, setLoading] = useState(false)
   const { currentUser } = useSelector((state) => state.user);
   const stripePromise = loadStripe(
     "pk_test_51N4ZeAJ7w1xo6cigIFo0bwK5Ca41oOL71d1BL8xQc92eGixFj66k9DHYFPz3MOW4GnMhe5labVPOm7u6lLk3iYQ700yRY8GD5M"
@@ -62,24 +65,30 @@ const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
   const handlePayment = async () => {
     try {
       if (currentUser) {
+        setLoading(true)
         const stripe = await stripePromise;
         const res = await makeRequest.post("/orders", {
           cartItems,
         });
-
+        
+        dispatch(resetCart())
         await stripe.redirectToCheckout({
           sessionId: res.data.stripeSession.id,
         });
+        setLoading(false)
       } else {
         setAlert(true);
+        setError("You need to sign in as a registered user before making a purchase!")
       }
     } catch (err) {
-      console.log(err, "error");
+      setLoading(false)
+      setAlert(true)
+      setError("Check your internet connectivity")
     }
   };
   // ALERT MODAL
   const [alert, setAlert] = useState(false);
-
+  const [error, setError] = useState("")
   return (
     <>
       <div ref={cartContainerRef} className="cart-container">
@@ -146,7 +155,7 @@ const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
                           +
                         </span>
                       </div>
-                      <p>N {item.price * item.quantity}</p>
+                      <p>$ {item.price * item.quantity}.99</p>
                     </div>
                   </div>
                 </div>
@@ -157,20 +166,20 @@ const CartMenu = ({ cartRef, cartContainerRef, cartItems }) => {
           <div className="bottom-pay">
             <p>{}</p>
             <hr />
-            <div className="total">
+            {cartTotal ? <div className="total">
               <p>Subtotal:</p>
-              <p>N {cartTotal}</p>
-            </div>
-            <button className="toCart" onClick={handleGoToCart}>
+              <p>$ {cartTotal}.99</p>
+            </div> : ""}
+            <button className="toCart" onClick={handleGoToCart} disabled={loading}>
               View Cart
             </button>
             <button onClick={handlePayment} className="checkout">
-              Checkout
+              {loading ? <CircularProgress size={25} thickness={1}/> : "Checkout"}
             </button>
           </div>
         </div>
       </div>
-      {alert && <Alert setAlert={setAlert} />}
+      {alert && <Alert setAlert={setAlert} message={error}/>}
     </>
   );
 };

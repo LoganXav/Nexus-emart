@@ -22,16 +22,16 @@ const Search = () => {
   useEffect(() => {
     if (data) {
       setProducts(data);
-    } 
+    }
   }, [data]);
 
   const handleSearch = () => {
     setQuery(search);
   };
 
-  console.log("state" ,state)
-  console.log("data" ,data)
-  console.log("products",products)
+  console.log("state", state);
+  console.log("data", data);
+  console.log("products", products);
 
   return (
     <div className="shop">
@@ -74,9 +74,11 @@ const Search = () => {
               "Something went wrong"
             ) : (
               <div className="card-container">
-                {products.map((product, i) => (
-                  <Card key={product.id} item={products} i={i} />
-                ))}
+                <div className="container">
+                  {products.map((product, i) => (
+                    <Card key={product.id} item={products} i={i} />
+                  ))}
+                </div>
               </div>
             )}
           </div>

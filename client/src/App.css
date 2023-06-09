@@ -27,3 +27,14 @@ label, input, button, a{
 .red{
     color: red;
 }
+.green{
+    color: green;
+    font-weight: bold;
+}
+.circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    min-width: 20rem;
+  }

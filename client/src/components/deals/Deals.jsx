@@ -3,6 +3,7 @@ import Card from "../card/Card";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Deals = () => {
   const { data, loading, error } = useFetch(
@@ -26,14 +27,16 @@ const Deals = () => {
         </motion.p>
       </div>
       {loading ? (
-        "loading..."
+       <div className="circle"><CircularProgress /></div>
       ) : error ? (
         "Something went wrong"
       ) : (
         <div className="bottom">
+          <div className="container">
           {data.map((deal, i) => (
             <Card key={deal.id} item={data} i={i} />
           ))}
+          </div>
         </div>
       )}
       <Link className="link" to="/shop">

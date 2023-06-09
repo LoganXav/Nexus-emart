@@ -5,9 +5,10 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 0.5rem;
   gap: 1rem;
   @media (max-width: 768px) {
-    width: calc(100% / 2.5);
+    width: calc(100% / 2);
   }
 
   .image {
@@ -19,7 +20,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 80%;
+    z-index: 10;
+    min-height: 70%;
 
     img {
       width: 300px;
@@ -53,7 +55,7 @@
     }
     .options {
       position: absolute;
-      z-index: 99;
+      z-index: -1;
       display: flex;
       flex-direction: column;
       height: 90%;

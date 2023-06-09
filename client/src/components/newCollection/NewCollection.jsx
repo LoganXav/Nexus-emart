@@ -2,6 +2,7 @@ import Card from "../card/Card";
 import "./newCollection.scss";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const NewCollection = () => {
   const { data, loading, error } = useFetch(
@@ -21,19 +22,23 @@ const NewCollection = () => {
           }}
           viewport={{ once: true }}
         >
-          Wand crossbow phoenix levicorpus sirius. Easy raw-steak half-blood
-          petrified veela house lupin it.
+          Introducing our latest electrifying collections, where innovation
+          meets style in the world of electronics.
         </motion.p>
       </div>
       {loading ? (
-        "loading..."
+        <div className="circle">
+          <CircularProgress />
+        </div>
       ) : error ? (
         "Something went wrong"
       ) : (
         <div className="bottom">
-          {data.map((collection, i) => (
-            <Card key={collection.id} item={data} i={i} />
-          ))}
+          <div className="container">
+            {data.map((collection, i) => (
+              <Card key={collection.id} item={data} i={i} />
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -1,12 +1,10 @@
 import "./Hero.scss";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
+import heroImg from "../../../public/assets/hero-img.png"
 
 const Hero = () => {
-  const { data, loading, error } = useFetch(
-    "/products?populate=*&[filters][type][$eq]=hero"
-  );
 
   return (
     <div className="hero-container">
@@ -16,7 +14,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              delay: 4,
+              delay: 1,
               ease: [0.6, 0.01, 0.05, 0.9],
               duration: 1.5,
             }}
@@ -28,7 +26,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: 4,
+              delay: 1,
               ease: [0.6, 0.01, 0.05, 0.9],
               duration: 1.5,
             }}
@@ -42,7 +40,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 4,
+                delay: 1,
                 ease: [0.6, 0.01, 0.05, 0.9],
                 duration: 1.5,
               }}
@@ -58,19 +56,12 @@ const Hero = () => {
           </Link>
         </div>
         <div className="right">
-          {loading ? (
-            "loading..."
-          ) : error ? (
-            "Something went wrong"
-          ) : (
+         
             <img
-              src={
-                import.meta.env.VITE_APP_UPLOAD_URL +
-                data[0]?.attributes?.img.data.attributes.url
-              }
+              src={heroImg}
               alt="heroImg"
             />
-          )}
+       
         </div>
       </div>
     </div>

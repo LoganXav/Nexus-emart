@@ -38,7 +38,6 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         line_items: lineItems,
       });
 
-      console.log(session)
       await strapi
         .service("api::order.order")
         .create({ data: {  cartItems, stripeId: session.id } });

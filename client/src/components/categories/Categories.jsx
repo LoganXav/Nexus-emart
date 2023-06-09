@@ -1,6 +1,7 @@
 import "./Categories.scss";
 import useFetch from "../../hooks/useFetch";
 import { motion, AnimatePresence } from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Categories = () => {
   const { data, loading, error } = useFetch("/categories?populate=*");
@@ -20,12 +21,11 @@ const Categories = () => {
             viewport={{ once: true }}
           >
             We offer a wide range of electronics products to meet all your
-            needs. Below, you'll find our categories section, where you can
-            easily browse and shop for your favourite products.
+            needs. Browse and shop for your favourite products.
           </motion.p>
         </div>
         {loading ? (
-          "loading..."
+            <div className="circle"><CircularProgress /></div>
         ) : error ? (
           "Something went wrong"
         ) : (

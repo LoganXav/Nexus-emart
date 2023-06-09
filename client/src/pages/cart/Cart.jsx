@@ -6,15 +6,18 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
+  resetCart,
 } from "../../redux/cartReducer";
 import { loadStripe } from "@stripe/stripe-js";
 import { makeRequest } from "../../makeRequest";
 import Alert from "../../components/alert/Alert"
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Cart = () => {
   const dispatch = useDispatch();
 
   // CHECKOUT PAYMENT
+  const [loading, setLoading] = useState(false)
   const cartItems = useSelector((state) => state.cart.products);
   const { currentUser } = useSelector((state) => state.user);
 
@@ -25,7 +28,7 @@ const Cart = () => {
   const handlePayment = async () => {
     try {
       if (currentUser) {
-
+        setLoading(true)
         const stripe = await stripePromise;
         const res = await makeRequest.post("/orders", {
           cartItems,
@@ -34,14 +37,19 @@ const Cart = () => {
         await stripe.redirectToCheckout({
           sessionId: res.data.stripeSession.id,
         });
+        setLoading(false)
+        dispatch(resetCart())
       } else {
         setAlert(true)
+        setError("You need to sign in as a registered user before making a purchase!")
       }
     } catch (err) {
-      console.log(err, "error");
+      setAlert(true)
+      setError("Check your internet connectivity")
     }
   };
-  console.log(cartItems)
+
+
 
   // CART TOTAL PRICE
   const cartTotal = cartItems.reduce(
@@ -51,6 +59,7 @@ const Cart = () => {
 
   // ALERT MODAL
   const [alert, setAlert] = useState(false)
+  const [error, setError] = useState("")
 
   return (
     <div className="cart">
@@ -94,7 +103,7 @@ const Cart = () => {
                       </div>
                     </td>
                     <td>{item.title}</td>
-                    <td>N {item.price}</td>
+                    <td>$ {item.price}.99</td>
                     <td>
                       <div className="quantity">
                         <p
@@ -120,7 +129,7 @@ const Cart = () => {
                         </p>
                       </div>
                     </td>
-                    <td>N {item.quantity * item.price}</td>
+                    <td>$ {item.quantity * item.price}.99</td>
                   </tr>
                 </tbody>
               ))}
@@ -135,7 +144,7 @@ const Cart = () => {
             <hr />
             <div className="subtotal">
               <p>Subtotal</p>
-              <p>{cartTotal}</p>
+              <p>${cartTotal}.99</p>
             </div>
             <hr />
             <div className="shipping">
@@ -143,7 +152,7 @@ const Cart = () => {
                 <p>Shipping</p>
                 <div className="subtotal">
                   <p>Flat rate:</p>
-                  <p>N 258</p>
+                  <p>$ 1.99</p>
                 </div>
                 <p>
                   Shipping to <b>NGA.</b>
@@ -154,13 +163,15 @@ const Cart = () => {
             <hr />
             <div className="subtotal">
               <p>Total</p>
-              <p>N {cartTotal - 258}</p>
+              <p>$ {cartTotal - 2}.99</p>
             </div>
-            <button onClick={handlePayment}>Proceed To Checkout</button>
+            <button onClick={handlePayment} className="checkout">
+              {loading ? <CircularProgress size={25} thickness={2}/> : "Proceed to checkout"}
+            </button>
           </div>
         </div>
       )}
-      {alert && <Alert setAlert = {setAlert} />}
+      {alert && <Alert setAlert = {setAlert} message={error} />}
     </div>
   );
 };

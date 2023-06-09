@@ -66,6 +66,18 @@
     },
     "oldPrice": {
       "type": "decimal"
+    },
+    "connection": {
+      "type": "string"
+    },
+    "specialFeature": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "amountLeft": {
+      "type": "integer"
     }
   }
 }

@@ -120,7 +120,7 @@ const UserSignInModal = ({ userOpen, setUserOpen }) => {
     };
   }, [modalRef]);
 
-  // HANDLES SWITCHING BETWEEN RESIATER AND SIGN IN
+  // HANDLES SWITCHING BETWEEN REGISTER AND SIGN IN
   const [userRegister, setUserRegister] = useState(false);
   function handleSigninClick() {
     setUserRegister(false);

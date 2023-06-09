@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "order"
+    "displayName": "order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,11 +15,17 @@
     "email": {
       "type": "string"
     },
-    "stripeid": {
+    "stripeId": {
       "type": "text"
     },
-    "products": {
+    "cartItems": {
       "type": "json"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "order"
     }
   }
 }

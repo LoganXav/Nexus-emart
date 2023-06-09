@@ -51,7 +51,7 @@ const Wishlist = () => {
                     </div>
                   </td>
                   <td>{item.title}</td>
-                  <td>N {item.price}</td>
+                  <td>$ {item.price}.99</td>
                   <td>{item.date}</td>
                   <td>{item.inStock ? <p>In Stock {<i className="ri-check-line"></i>} </p> : "Out of Stock"}</td>
                   <td>

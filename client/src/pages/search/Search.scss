@@ -48,12 +48,18 @@
       font-size: 1.5rem;
     }
     .card-container {
-      width: 90vw;
       display: flex;
+      width: 100%;
       margin: 0 auto;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 2rem;
+      justify-content: center;
+      
+      .container{
+        flex-wrap: wrap;
+        display: flex;
+        width: 90%;
+        justify-content: flex-start;
+
+      }
     }
   }
 }

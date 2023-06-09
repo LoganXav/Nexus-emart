@@ -1,22 +1,13 @@
 import "./creativeFeatures.scss";
 import useFetch from "../../hooks/useFetch";
 import { motion, AnimatePresence } from "framer-motion";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const CreativeFeatures = () => {
-  const { data, loading, error } = useFetch(
-    "/products?populate=*&[filters][type][$eq]=creative"
-  );
-
   return (
     <div className="creative">
       <div className="left">
-        {loading ? (
-          "loading..."
-        ) : error ? (
-          "Something went wrong"
-        ) : (
-          <img src="https://emart.wpthemedemos.com/electronic-gadget/wp-content/uploads/sites/13/2022/12/last-sec-left-img-1024x788.webp" />
-        )}
+        <img src="https://emart.wpthemedemos.com/electronic-gadget/wp-content/uploads/sites/13/2022/12/last-sec-left-img-1024x788.webp" />
       </div>
       <div className="right">
         <h1>Creative Features</h1>

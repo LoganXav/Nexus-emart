@@ -13,7 +13,7 @@
     justify-content: center;
     padding: 6rem 0;
     gap: 2rem;
-    h1{
+    h1 {
       font-size: 3rem;
       text-align: center;
     }
@@ -29,7 +29,7 @@
         flex-direction: column;
       }
       input {
-        padding: .9rem 1rem;
+        padding: 0.9rem 1rem;
         border: none;
         background-color: rgb(244, 240, 240);
         color: rgb(0, 0, 0);
@@ -64,8 +64,26 @@
     padding: 1rem 0;
     font-size: 1rem;
     width: 80%;
+    max-width: 1500px;
     @media (max-width: 900px) {
       flex-direction: column;
+      gap: 1.5rem;
+    }
+    .logos {
+      width: 10rem;
+    }
+    .icons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      a {
+        text-decoration: none;
+        font-size: 1rem;
+        color: rgb(144, 144, 144);
+        cursor: pointer;
+        margin: 0 1rem;
+      }
     }
   }
 }
